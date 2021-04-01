@@ -6,13 +6,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    ingredients: {},
+    ingredients: [],
     categories: [],
   },
   getters: {
-    newIdByCategory: state => categoryValue => {
-      const newId = state.ingredients[categoryValue].length
-        ? state.ingredients[categoryValue].reduce((result, item) => {
+    ingredientListByCategory: state => categoryValue => state.ingredients
+      .find(item => item.category.value === categoryValue).ingredientList,
+    newIdByCategory: (state, getters) => categoryValue => {
+      const targetList = getters.ingredientListByCategory(categoryValue);
+      const newId = targetList.length
+        ? targetList.reduce((result, item) => {
           if (item.id > result) {
             result = item.id; // eslint-disable-line
           }
@@ -26,21 +29,18 @@ export default new Vuex.Store({
   },
   mutations: {
     addIngredient(state, ingredient) {
-      state.ingredients = {
-        ...state.ingredients,
-        [ingredient.category]: [
-          ...state.ingredients[ingredient.category],
-          ingredient,
-        ],
-      };
+      state.ingredients
+        .find(item => item.category.value === ingredient.category).ingredientList
+        .push(ingredient);
     },
     setCategories(state, categories) {
       state.categories = categories;
     },
     setCategoriesInIngredients(state) {
-      state.categories.forEach(item => {
-        state.ingredients[item.value] = [];
-      });
+      state.ingredients = state.categories.map(category => ({
+        category,
+        ingredientList: [],
+      }));
     },
   },
   actions: {

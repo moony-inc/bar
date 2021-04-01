@@ -1,16 +1,16 @@
 <template>
   <div>
     <div
-      v-for="category in categories"
-      v-show="ingredients[category.value].length"
-      :key="category.value"
+      v-for="item in ingredients"
+      v-show="item.ingredientList.length"
+      :key="item.category.value"
     >
-      {{ category.caption }}
+      {{ item.category.caption }}
       <div
-        v-for="ingredient in ingredients[category.value]"
+        v-for="ingredient in item.ingredientList"
         :key="ingredient.id"
       >
-        {{ingredient.name}}
+        {{ ingredient.name }}
       </div>
     </div>
   </div>
