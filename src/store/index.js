@@ -42,6 +42,10 @@ export default new Vuex.Store({
         ingredientList: [],
       }));
     },
+    deleteIngredient(state, ingredient) {
+      let { ingredientList } = state.ingredients.find(item => item.category.value === ingredient.category); // eslint-disable-line
+      state.ingredients.find(item => item.category.value === ingredient.category).ingredientList = ingredientList.filter(item => item.id !== ingredient.id); // eslint-disable-line
+    },
   },
   actions: {
     fetchCategories({ commit }) {

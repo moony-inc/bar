@@ -11,13 +11,14 @@
         :key="ingredient.id"
       >
         {{ ingredient.name }}
+        <button type="button" @click="deleteIngredient(ingredient)">x</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   computed: {
@@ -25,18 +26,13 @@ export default {
       'ingredients',
       'categories',
     ]),
-    categoriesWithIngredients() {
-      return this.categories.filter(category => this.ingredients[category.value].length);
-    },
-    cats() {
-      return this.categories.map(category => {
-        const result = { ...category };
-        result.list = this.ingredients[category.value];
-        result.isShown = result.list.length;
-        console.log(result.list.length);
-
-        return result;
-      });
+  },
+  methods: {
+    ...mapMutations({
+      deleteIngredientStore: 'deleteIngredient',
+    }),
+    deleteIngredient(ingredient) {
+      this.deleteIngredientStore(ingredient);
     },
   },
 };
