@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <Home />
-  </div>
+  <Home />
 </template>
 
 <script>
@@ -11,11 +9,14 @@ import { mapActions } from 'vuex';
 export default {
   components: { Home },
   created() {
-    this.fetchCategories();
+    this.fetchCategories().then(() => {
+      this.checkLocalIngredients();
+    });
   },
   methods: {
     ...mapActions([
       'fetchCategories',
+      'checkLocalIngredients',
     ]),
   },
 };

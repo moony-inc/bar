@@ -19,7 +19,7 @@
 
 <script>
 import IngredientList from '@/components/IngredientList.vue';
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   components: { IngredientList },
@@ -36,7 +36,7 @@ export default {
     ]),
   },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       addIngredientStore: 'addIngredient',
     }),
     getIngredientData() {
@@ -54,6 +54,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-</style>

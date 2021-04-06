@@ -28,11 +28,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    addIngredient(state, ingredient) {
-      state.ingredients
-        .find(item => item.category.value === ingredient.category).ingredientList
-        .push(ingredient);
-    },
     setCategories(state, categories) {
       state.categories = categories;
     },
@@ -42,9 +37,21 @@ export default new Vuex.Store({
         ingredientList: [],
       }));
     },
+    setIngredients(state, ingredients) {
+      state.ingredients = ingredients;
+    },
+    addIngredient(state, ingredient) {
+      state.ingredients
+        .find(item => item.category.value === ingredient.category).ingredientList
+        .push(ingredient);
+    },
     deleteIngredient(state, ingredient) {
-      let { ingredientList } = state.ingredients.find(item => item.category.value === ingredient.category); // eslint-disable-line
-      state.ingredients.find(item => item.category.value === ingredient.category).ingredientList = ingredientList.filter(item => item.id !== ingredient.id); // eslint-disable-line
+      const { ingredientList } = state.ingredients
+        .find(item => item.category.value === ingredient.category);
+
+      state.ingredients
+        .find(item => item.category.value === ingredient.category).ingredientList = ingredientList
+          .filter(item => item.id !== ingredient.id);
     },
   },
   actions: {
@@ -53,6 +60,24 @@ export default new Vuex.Store({
         commit('setCategories', data);
         commit('setCategoriesInIngredients');
       });
+    },
+    checkLocalIngredients({ commit }) {
+      const localIngredients = localStorage.getItem('ingredients');
+
+      if (localIngredients) {
+        commit('setIngredients', JSON.parse(localIngredients));
+      }
+    },
+    saveIngredientsLocalStorage({ state }) {
+      localStorage.setItem('ingredients', JSON.stringify(state.ingredients));
+    },
+    addIngredient({ commit, dispatch }, ingredient) {
+      commit('addIngredient', ingredient);
+      dispatch('saveIngredientsLocalStorage');
+    },
+    deleteIngredient({ commit, dispatch }, ingredient) {
+      commit('deleteIngredient', ingredient);
+      dispatch('saveIngredientsLocalStorage');
     },
   },
   modules: {

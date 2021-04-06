@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ingredients-list">
     <div
       v-for="item in ingredients"
       v-show="item.ingredientList.length"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -28,12 +28,9 @@ export default {
     ]),
   },
   methods: {
-    ...mapMutations({
-      deleteIngredientStore: 'deleteIngredient',
-    }),
-    deleteIngredient(ingredient) {
-      this.deleteIngredientStore(ingredient);
-    },
+    ...mapActions([
+      'deleteIngredient',
+    ]),
   },
 };
 </script>
