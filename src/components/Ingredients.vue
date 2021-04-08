@@ -45,16 +45,13 @@ export default {
     ...mapActions({
       addIngredientStore: 'addIngredient',
     }),
-    getIngredientData() {
-      return {
+    addIngredient() {
+      this.addIngredientStore({
         name: this.ingredientName,
         category: this.selectedCategory,
         availability: true,
         id: this.newIdByCategory(this.selectedCategory),
-      };
-    },
-    addIngredient() {
-      this.addIngredientStore(this.getIngredientData());
+      });
       this.ingredientName = '';
     },
   },
