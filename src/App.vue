@@ -10,13 +10,13 @@ export default {
   components: { Home },
   created() {
     this.fetchCategories().then(() => {
-      this.checkLocalIngredients();
+      this.setupIngredients();
     });
   },
   methods: {
     ...mapActions([
       'fetchCategories',
-      'checkLocalIngredients',
+      'setupIngredients',
     ]),
   },
 };

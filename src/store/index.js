@@ -58,18 +58,16 @@ export default new Vuex.Store({
     fetchCategories({ commit }) {
       return axios.get('/categories.json').then(({ data }) => {
         commit('setCategories', data);
-        commit('setCategoriesInIngredients');
       });
     },
-    checkLocalIngredients({ commit }) {
+    setupIngredients({ commit }) {
       const localIngredients = localStorage.getItem('ingredients');
 
       if (localIngredients) {
         commit('setIngredients', JSON.parse(localIngredients));
+      } else {
+        commit('setCategoriesInIngredients');
       }
-    },
-    saveIngredientsLocalStorage({ state }) {
-      localStorage.setItem('ingredients', JSON.stringify(state.ingredients));
     },
     addIngredient({ commit, dispatch }, ingredient) {
       commit('addIngredient', ingredient);
@@ -79,7 +77,9 @@ export default new Vuex.Store({
       commit('deleteIngredient', ingredient);
       dispatch('saveIngredientsLocalStorage');
     },
-  },
-  modules: {
+    // local storage methods
+    saveIngredientsLocalStorage({ state }) {
+      localStorage.setItem('ingredients', JSON.stringify(state.ingredients));
+    },
   },
 });

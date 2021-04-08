@@ -2,8 +2,14 @@
   <div class="ingredients">
     <IngredientList />
     <form @submit.prevent="addIngredient">
-      <input type="text" v-model="ingredientName">
-      <select required v-model="selectedCategory">
+      <input
+        type="text"
+        v-model="ingredientName"
+      >
+      <select
+        required
+        v-model="selectedCategory"
+      >
         <option
           v-for="(category, index) in categories"
           :value="category.value"

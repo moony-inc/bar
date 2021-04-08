@@ -11,7 +11,10 @@
         :key="ingredient.id"
       >
         {{ ingredient.name }}
-        <button type="button" @click="deleteIngredient(ingredient)">x</button>
+        <button
+          type="button"
+          @click="deleteIngredient(ingredient)"
+        >x</button>
       </div>
     </div>
   </div>
