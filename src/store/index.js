@@ -10,14 +10,14 @@ export default new Vuex.Store({
     categories: [],
   },
   getters: {
-    ingredientListByCategory: state => categoryValue => state.ingredients
-      .find(item => item.category.value === categoryValue).ingredientList,
-    newIdByCategory: (state, getters) => categoryValue => {
-      const targetList = getters.ingredientListByCategory(categoryValue);
+    ingredientListByCategory: state => category => state.ingredients
+      .find(item => item.category.value === category).ingredientList,
+    newIdByCategory: (state, getters) => category => {
+      const targetList = getters.ingredientListByCategory(category);
       const newId = targetList.length
         ? targetList.reduce((result, item) => {
           if (item.id > result) {
-            result = item.id; // eslint-disable-line
+            result = item.id; // eslint-disable-line no-param-reassign
           }
 
           return result;
@@ -48,10 +48,10 @@ export default new Vuex.Store({
     deleteIngredient(state, ingredient) {
       const { ingredientList } = state.ingredients
         .find(item => item.category.value === ingredient.category);
+      const filteredIngredientList = ingredientList.filter(item => item.id !== ingredient.id);
 
-      state.ingredients
-        .find(item => item.category.value === ingredient.category).ingredientList = ingredientList
-          .filter(item => item.id !== ingredient.id);
+      state.ingredients.find(item => item.category.value === ingredient.category)
+        .ingredientList = filteredIngredientList;
     },
   },
   actions: {
