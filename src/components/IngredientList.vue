@@ -3,7 +3,7 @@
      <div
         v-for="category in categoriesToShow"
         :key="category.value"
-    >
+     >
       {{ category.name }}
       <div
         v-for="ingredient in ingredientsByCategory(category)"

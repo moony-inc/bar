@@ -7,8 +7,8 @@
         v-model="ingredientName"
       >
       <select
-        required
         v-model="selectedCategory"
+        required
       >
         <option
           v-for="category in categories"
