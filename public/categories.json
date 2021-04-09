@@ -1,26 +1,26 @@
 [
     {
         "value": "spirits",
-        "caption": "крепкий акоголь"
+        "name": "крепкий акоголь"
     },
     {
         "value": "liqueurs",
-        "caption": "ликёры и настойки"
+        "name": "ликёры и настойки"
     },
     {
         "value": "wines",
-        "caption": "вермуты и вина"
+        "name": "вермуты и вина"
     },
     {
         "value": "soft",
-        "caption": "безалкогольное"
+        "name": "безалкогольное"
     },
     {
         "value": "syrops",
-        "caption": "сиропы"
+        "name": "сиропы"
     },
     {
         "value": "other",
-        "caption": "другое"
+        "name": "другое"
     }
 ]
