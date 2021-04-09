@@ -38,7 +38,7 @@ export default {
       'categories',
     ]),
     ...mapGetters([
-      'newId',
+      'newIngredientId',
     ]),
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
         name: this.ingredientName,
         category: this.selectedCategory,
         availability: true,
-        id: this.newId,
+        id: this.newIngredientId,
       });
       this.ingredientName = '';
     },

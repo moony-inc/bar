@@ -10,7 +10,7 @@ export default new Vuex.Store({
     categories: [],
   },
   getters: {
-    newId: state => (state.ingredients.length
+    newIngredientId: state => (state.ingredients.length
       ? state.ingredients[state.ingredients.length - 1].id + 1
       : 0),
   },
@@ -25,9 +25,7 @@ export default new Vuex.Store({
       state.ingredients.push(ingredient);
     },
     deleteIngredient(state, ingredient) {
-      const filteredIngredients = state.ingredients.filter(item => item.id !== ingredient.id);
-
-      state.ingredients = filteredIngredients;
+      state.ingredients = state.ingredients.filter(item => item.id !== ingredient.id);
     },
   },
   actions: {

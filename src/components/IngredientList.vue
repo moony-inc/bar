@@ -1,13 +1,12 @@
 <template>
   <div class="ingredients-list">
      <div
-        v-for="category in categories"
-        v-show="ingredients.find(item => item.category === category.value)"
+        v-for="category in categoriesToShow"
         :key="category.value"
     >
       {{ category.name }}
       <div
-        v-for="ingredient in ingredients.filter(item => item.category === category.value)"
+        v-for="ingredient in ingredientsToShow(category)"
         :key="ingredient.id"
       >
         {{ ingredient.name }}
@@ -29,6 +28,14 @@ export default {
       'ingredients',
       'categories',
     ]),
+    categoriesToShow() {
+      return this.categories
+        .filter(category => this.ingredients
+          .find(ingredient => ingredient.category === category.value));
+    },
+    ingredientsToShow() {
+      return category => this.ingredients.filter(item => item.category === category.value);
+    },
   },
   methods: {
     ...mapActions([
