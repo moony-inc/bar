@@ -1,13 +1,13 @@
 <template>
   <div class="ingredients-list">
-    <div
-      v-for="item in ingredients"
-      v-show="item.ingredientList.length"
-      :key="item.category.value"
+     <div
+        v-for="category in categories"
+        v-show="ingredients.find(item => item.category === category.value)"
+        :key="category.value"
     >
-      {{ item.category.caption }}
+      {{ category.name }}
       <div
-        v-for="ingredient in item.ingredientList"
+        v-for="ingredient in ingredients.filter(item => item.category === category.value)"
         :key="ingredient.id"
       >
         {{ ingredient.name }}

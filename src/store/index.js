@@ -10,48 +10,24 @@ export default new Vuex.Store({
     categories: [],
   },
   getters: {
-    ingredientListByCategory: state => category => state.ingredients
-      .find(item => item.category.value === category).ingredientList,
-    newIdByCategory: (state, getters) => category => {
-      const targetList = getters.ingredientListByCategory(category);
-      const newId = targetList.length
-        ? targetList.reduce((result, item) => {
-          if (item.id > result) {
-            result = item.id; // eslint-disable-line no-param-reassign
-          }
-
-          return result;
-        }, 0) + 1
-        : 0;
-
-      return newId;
-    },
+    newId: state => (state.ingredients.length
+      ? state.ingredients[state.ingredients.length - 1].id + 1
+      : 0),
   },
   mutations: {
     setCategories(state, categories) {
       state.categories = categories;
     },
-    setCategoriesInIngredients(state) {
-      state.ingredients = state.categories.map(category => ({
-        category,
-        ingredientList: [],
-      }));
-    },
     setIngredients(state, ingredients) {
       state.ingredients = ingredients;
     },
     addIngredient(state, ingredient) {
-      state.ingredients
-        .find(item => item.category.value === ingredient.category).ingredientList
-        .push(ingredient);
+      state.ingredients.push(ingredient);
     },
     deleteIngredient(state, ingredient) {
-      const { ingredientList } = state.ingredients
-        .find(item => item.category.value === ingredient.category);
-      const filteredIngredientList = ingredientList.filter(item => item.id !== ingredient.id);
+      const filteredIngredients = state.ingredients.filter(item => item.id !== ingredient.id);
 
-      state.ingredients.find(item => item.category.value === ingredient.category)
-        .ingredientList = filteredIngredientList;
+      state.ingredients = filteredIngredients;
     },
   },
   actions: {
@@ -65,8 +41,6 @@ export default new Vuex.Store({
 
       if (localIngredients) {
         commit('setIngredients', JSON.parse(localIngredients));
-      } else {
-        commit('setCategoriesInIngredients');
       }
     },
     addIngredient({ commit, dispatch }, ingredient) {

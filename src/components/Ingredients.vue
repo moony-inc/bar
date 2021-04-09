@@ -11,11 +11,11 @@
         v-model="selectedCategory"
       >
         <option
-          v-for="(category, index) in categories"
+          v-for="category in categories"
           :value="category.value"
-          :key="index"
+          :key="category.value"
         >
-          {{ category.caption }}
+          {{ category.name }}
         </option>
       </select>
       <button type="submit">добавить</button>
@@ -38,7 +38,7 @@ export default {
       'categories',
     ]),
     ...mapGetters([
-      'newIdByCategory',
+      'newId',
     ]),
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
         name: this.ingredientName,
         category: this.selectedCategory,
         availability: true,
-        id: this.newIdByCategory(this.selectedCategory),
+        id: this.newId,
       });
       this.ingredientName = '';
     },
