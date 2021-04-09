@@ -6,7 +6,7 @@
     >
       {{ category.name }}
       <div
-        v-for="ingredient in ingredientsToShow(category)"
+        v-for="ingredient in ingredientsByCategory(category)"
         :key="ingredient.id"
       >
         {{ ingredient.name }}
@@ -33,7 +33,7 @@ export default {
         .filter(category => this.ingredients
           .find(ingredient => ingredient.category === category.value));
     },
-    ingredientsToShow() {
+    ingredientsByCategory() {
       return category => this.ingredients.filter(item => item.category === category.value);
     },
   },
