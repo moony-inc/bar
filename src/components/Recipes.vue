@@ -1,5 +1,6 @@
 <template>
   <div class="recipes">
+    <h1>рецепты</h1>
     <RecipeList />
     <RecipeForm />
   </div>
@@ -13,3 +14,14 @@ export default {
   components: { RecipeList, RecipeForm },
 };
 </script>
+
+<style lang="scss">
+  .recipes {
+
+    h1 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+  }
+</style>

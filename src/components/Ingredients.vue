@@ -1,5 +1,6 @@
 <template>
   <div class="ingredients">
+    <h1>ингредиенты</h1>
     <IngredientList />
     <form @submit.prevent="addIngredient">
       <input
@@ -57,3 +58,25 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .ingredients {
+
+    h1 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    form {
+      margin: 10px 0;
+      padding: 5px 0;
+    }
+
+    input,
+    select,
+    button {
+      margin: 5px;
+    }
+
+  }
+</style>

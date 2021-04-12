@@ -1,7 +1,11 @@
 <template>
   <div class="home">
-    <Ingredients />
-    <Recipes />
+    <div class="ingredients-el">
+      <Ingredients />
+    </div>
+    <div class="recipes-el">
+      <Recipes />
+    </div>
   </div>
 </template>
 
@@ -13,3 +17,20 @@ export default {
   components: { Ingredients, Recipes },
 };
 </script>
+
+<style lang="scss">
+  .home {
+    display: flex;
+    justify-content: flex-start;
+
+    .ingredients {
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .recipes {
+      margin: 20px;
+      padding: 20px;
+    }
+  }
+</style>

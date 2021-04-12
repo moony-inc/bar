@@ -1,11 +1,12 @@
 <template>
-  <div class="ingredients-list">
-     <div
-        v-for="category in categoriesToShow"
-        :key="category.value"
-     >
-      {{ category.name }}
+  <div class="ingredient-list">
+    <div
+      v-for="category in categoriesToShow"
+      :key="category.value"
+    >
+      <h2>{{ category.name }}</h2>
       <div
+        class="ingredient"
         v-for="ingredient in ingredientsByCategory(category)"
         :key="ingredient.id"
       >
@@ -13,6 +14,7 @@
         <button
           type="button"
           :disabled="usingIngredientInRecipesById(ingredient.id)"
+          :title="usingIngredientInRecipesById(ingredient.id) ? 'ингредиент используется' : ''"
           @click="deleteIngredient(ingredient)"
         >x</button>
       </div>
@@ -48,3 +50,22 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .ingredient-list {
+
+    h2 {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+
+    .ingredient {
+      margin-left: 15px;
+    }
+
+    button {
+      padding: 0 3px;
+    }
+
+  }
+</style>

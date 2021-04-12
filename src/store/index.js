@@ -17,16 +17,17 @@ export default new Vuex.Store({
     newRecipeId: state => (state.recipes.length
       ? state.recipes[state.recipes.length - 1].id + 1
       : 0),
+    ingredientNameById: state => id => state.ingredients.find(item => item.id === id).name,
     usingIngredientInRecipesById: state => id => {
-      let disableDeleteIngredientButton = false;
+      let ingredientIsUsed = false;
 
       state.recipes.forEach(item => item.ingredients.forEach(element => {
         if (element.id === id) {
-          disableDeleteIngredientButton = true;
+          ingredientIsUsed = true;
         }
       }));
 
-      return disableDeleteIngredientButton;
+      return ingredientIsUsed;
     },
   },
   mutations: {

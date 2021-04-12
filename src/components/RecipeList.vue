@@ -1,35 +1,41 @@
 <template>
   <div class="recipe-list">
     <div
-        v-for="recipe in recipes"
-        :key="recipe.id"
+      class="recipe"
+      v-for="recipe in recipes"
+      :key="recipe.id"
     >
-      {{ recipe.name }}
+      <h2 class="recipe-title">{{ recipe.name }}</h2>
+      <span
+        v-for="ingredient in recipe.ingredients"
+        :key="ingredient.id"
+      >
+        {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount+'; ' }}
+      </span>
+      <div>
+        {{"метод: "}}{{ recipe.method }}
+        {{"посуда: "}}{{ recipe.drinkware }}
+      </div>
       <button
+        class="delete-recipe-button"
         type="button"
         @click="deleteRecipe(recipe)"
       >X</button>
-        <div
-          v-for="ingredient in recipe.ingredients"
-          :key="ingredient.id"
-        >
-          {{ ingredients.find(item => item.id === ingredient.id).name }}
-          {{ ingredient.amount }}
-        </div>
-      {{ recipe.method }}
-      {{ recipe.glass }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapState([
       'recipes',
       'ingredients',
+    ]),
+    ...mapGetters([
+      'ingredientNameById',
     ]),
   },
   methods: {
@@ -39,3 +45,32 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .recipe-list {
+
+    .recipe {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .recipe-title {
+      font-size: 18px;
+      margin: 0;
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 0 3px;
+    }
+
+    .delete-recipe-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+  }
+</style>

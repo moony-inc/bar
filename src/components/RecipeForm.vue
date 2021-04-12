@@ -4,41 +4,48 @@
     @submit.prevent="addRecipe"
   >
     <label>
-      название
+      <span>название</span>
       <input
         type="text"
         v-model="recipeName"
         required
       >
     </label>
-    <div>
-      {{ "ингредиенты:" }}
-      <div
-        v-for="ingredient in recipeIngredients"
-        :key="ingredient.id"
-      >
-        {{ ingredients.find(item => item.id === ingredient.id).name }} {{ ingredient.amount }}
-      </div>
-      <select  v-model="selectedIngredient">
-        <option
-          v-for="ingredient in ingredients"
-          :value="ingredient.id"
+    <div class="recipe-ingredients">
+      <div class="recipe-ingredients-list">{{ "ингредиенты:" }}
+        <span
+          v-for="ingredient in recipeIngredients"
           :key="ingredient.id"
         >
-          {{ ingredient.name }}
-        </option>
-      </select>
+          {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount+'; ' }}
+        </span>
+      </div>
       <label>
-        сколько
+        <span>что</span>
+        <select v-model="selectedIngredient">
+          <option
+            v-for="ingredient in ingredients"
+            :value="ingredient.id"
+            :key="ingredient.id"
+          >
+            {{ ingredient.name }}
+          </option>
+        </select>
+      </label>
+      <label>
+        <span>сколько</span>
         <input
           type="text"
           v-model="selectedAmount"
         >
       </label>
-      <button @click="addIngredientToRecipe">добавить ингредиент</button>
+      <button
+        class="add-ingredient-to-recipe-button"
+        @click="addIngredientToRecipe"
+      >добавить ингредиент</button>
     </div>
     <label>
-      метод
+      <span>метод</span>
       <textarea
         v-model="method"
         required
@@ -46,14 +53,19 @@
       </textarea>
     </label>
     <label>
-      посуда
+      <span>посуда</span>
       <input
         type="text"
-        v-model="glass"
+        v-model="drinkware"
         required
       >
     </label>
-    <button type="submit">добавить рецепт</button>
+    <div>
+      <button
+        class="add-recipe-button"
+        type="submit"
+      >добавить рецепт</button>
+    </div>
   </form>
 </template>
 
@@ -67,7 +79,7 @@ export default {
     selectedAmount: '',
     recipeIngredients: [],
     method: '',
-    glass: '',
+    drinkware: '',
   }),
   computed: {
     ...mapState([
@@ -76,6 +88,7 @@ export default {
     ]),
     ...mapGetters([
       'newRecipeId',
+      'ingredientNameById',
     ]),
   },
   methods: {
@@ -95,14 +108,37 @@ export default {
         name: this.recipeName,
         ingredients: this.recipeIngredients,
         method: this.method,
-        glass: this.glass,
+        drinkware: this.drinkware,
         id: this.newRecipeId,
       });
       this.recipeName = '';
       this.recipeIngredients = [];
       this.method = '';
-      this.glass = '';
+      this.drinkware = '';
     },
   },
 };
 </script>
+
+<style lang="scss">
+  .recipe-form {
+    display: flex;
+    flex-direction: column;
+
+    label,
+    .recipe-ingredients {
+      margin-bottom: 20px;
+    }
+
+    span {
+      padding: 5px;
+      padding-left: 0;
+    }
+
+    .add-recipe-button {
+      padding: 8px;
+      margin-left: 60px;
+    }
+
+  }
+</style>
