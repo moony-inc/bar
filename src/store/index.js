@@ -17,6 +17,17 @@ export default new Vuex.Store({
     newRecipeId: state => (state.recipes.length
       ? state.recipes[state.recipes.length - 1].id + 1
       : 0),
+    usingIngredientInRecipesById: state => id => {
+      let disableDeleteIngredientButton = false;
+
+      state.recipes.forEach(item => item.ingredients.forEach(element => {
+        if (element.id === id) {
+          disableDeleteIngredientButton = true;
+        }
+      }));
+
+      return disableDeleteIngredientButton;
+    },
   },
   mutations: {
     setCategories(state, categories) {
@@ -36,6 +47,9 @@ export default new Vuex.Store({
     },
     addRecipe(state, recipe) {
       state.recipes.push(recipe);
+    },
+    deleteRecipe(state, recipe) {
+      state.recipes = state.recipes.filter(item => item.id !== recipe.id);
     },
   },
   actions: {
@@ -60,14 +74,18 @@ export default new Vuex.Store({
       dispatch('saveIngredientsLocalStorage');
     },
     setupRecipes({ commit }) {
-      const lockalRecipes = localStorage.getItem('recipes');
+      const localRecipes = localStorage.getItem('recipes');
 
-      if (lockalRecipes) {
-        commit('setRecipes', JSON.parse(lockalRecipes));
+      if (localRecipes) {
+        commit('setRecipes', JSON.parse(localRecipes));
       }
     },
     addRecipe({ commit, dispatch }, recipe) {
       commit('addRecipe', recipe);
+      dispatch('saveRecipesLocalStorage');
+    },
+    deleteRecipe({ commit, dispatch }, recipe) {
+      commit('deleteRecipe', recipe);
       dispatch('saveRecipesLocalStorage');
     },
     // local storage methods

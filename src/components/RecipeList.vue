@@ -3,7 +3,7 @@
     <div
         v-for="recipe in recipes"
         :key="recipe.id"
-     >
+    >
       {{ recipe.name }}
       <button
         type="button"
@@ -23,13 +23,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapState([
       'recipes',
       'ingredients',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'deleteRecipe',
     ]),
   },
 };
