@@ -1,11 +1,7 @@
 <template>
   <div class="home">
-    <div class="ingredients-el">
-      <Ingredients />
-    </div>
-    <div class="recipes-el">
-      <Recipes />
-    </div>
+    <Ingredients />
+    <Recipes />
   </div>
 </template>
 
@@ -22,13 +18,5 @@ export default {
   .home {
     display: flex;
     justify-content: flex-start;
-
-    .ingredients {
-      padding: 30px;
-    }
-
-    .recipes {
-      padding: 30px;
-    }
   }
 </style>

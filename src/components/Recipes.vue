@@ -1,6 +1,6 @@
 <template>
   <div class="recipes">
-    <h1>рецепты</h1>
+    <h1 class="title">рецепты</h1>
     <RecipeList />
     <RecipeForm />
   </div>
@@ -17,11 +17,11 @@ export default {
 
 <style lang="scss">
   .recipes {
+    padding: 30px;
 
-    h1 {
+    .title {
       margin-top: 0;
       font-size: 22px;
     }
-
   }
 </style>

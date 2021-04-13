@@ -6,24 +6,25 @@
     <label>
       <span>название</span><br>
       <input
+        class="input"
         type="text"
         v-model="recipeName"
         required
       >
     </label>
-    <div class="recipe-ingredients">
-      <div class="recipe-ingredients-list">{{ "ингредиенты:" }}
+    <div class="ingredient-form">
+      <div class="ingredient-list">{{ "ингредиенты:" }}
         <span
           v-for="ingredient in recipeIngredients"
           :key="ingredient.id"
         >
-          {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount+'; ' }}
+          {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
         </span>
       </div>
       <label>
-        <span>что</span>
+        <span class="ingredient-label">что</span>
         <select
-          class="resipe-ingredient-input"
+          class="ingredient-input"
           v-model="selectedIngredient"
         >
           <option
@@ -36,21 +37,21 @@
         </select>
       </label>
       <label>
-        <span>сколько</span>
+        <span class="ingredient-label">сколько</span>
         <input
-          class="resipe-ingredient-input"
+          class="ingredient-input"
           type="text"
           v-model="selectedAmount"
         >
       </label>
       <button
-        class="add-ingredient-to-recipe-button"
         @click="addIngredientToRecipe"
       >добавить ингредиент</button>
     </div>
     <label>
       <span>метод</span><br>
       <textarea
+        class="input"
         v-model="method"
         required
       >
@@ -59,6 +60,7 @@
     <label>
       <span>посуда</span><br>
       <input
+        class="input"
         type="text"
         v-model="drinkware"
         required
@@ -113,6 +115,7 @@ export default {
         drinkware: this.drinkware,
         id: this.newRecipeId,
       });
+
       this.recipeName = '';
       this.recipeIngredients = [];
       this.method = '';
@@ -130,28 +133,27 @@ export default {
     padding: 10px;
     background-color: rgba(114, 221, 198, 0.2);
 
-    .recipe-ingredients {
+    .ingredient-form {
       padding: 5px;
       margin-bottom: 15px;
       background-color: rgba(114, 221, 198, 0.4);
     }
 
-    .recipe-ingredients-list {
+    .ingredient-list {
       margin-bottom: 5px;
     }
 
-    .resipe-ingredient-input {
+    .ingredient-input {
       width: 100px;
       margin-bottom: 8px;
-    }
-
-    span,
-    select {
       margin-right: 5px;
     }
 
-    input,
-    textarea {
+    .ingredient-label {
+      margin-right: 5px;
+    }
+
+    .input {
       width: 200px;
       margin-top: 5px;
       margin-bottom: 20px;
@@ -161,6 +163,5 @@ export default {
       align-self: center;
       padding: 8px;
     }
-
   }
 </style>
