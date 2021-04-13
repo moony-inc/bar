@@ -11,12 +11,14 @@ export default {
   created() {
     this.fetchCategories().then(() => {
       this.setupIngredients();
+      this.setupRecipes();
     });
   },
   methods: {
     ...mapActions([
       'fetchCategories',
       'setupIngredients',
+      'setupRecipes',
     ]),
   },
 };

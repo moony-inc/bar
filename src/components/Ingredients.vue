@@ -1,14 +1,18 @@
 <template>
   <div class="ingredients">
+    <h1 class="title">ингредиенты</h1>
     <IngredientList />
-    <form @submit.prevent="addIngredient">
+    <form
+      class="add-form"
+      @submit.prevent="addIngredient"
+    >
       <input
         type="text"
         v-model="ingredientName"
       >
       <select
-        required
         v-model="selectedCategory"
+        required
       >
         <option
           v-for="category in categories"
@@ -57,3 +61,24 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .ingredients {
+    width: 250px;
+    padding: 30px;
+
+    .title {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    .add-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 150px;
+      height: 80px;
+      margin-top: 40px;
+    }
+  }
+</style>
