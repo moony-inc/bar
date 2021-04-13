@@ -4,7 +4,7 @@
     @submit.prevent="addRecipe"
   >
     <label>
-      <span>название</span><br>
+      <span class="label">название</span>
       <input
         class="input"
         type="text"
@@ -45,11 +45,11 @@
         >
       </label>
       <button
-        @click="addIngredientToRecipe"
+        @click.stop.prevent="addIngredientToRecipe"
       >добавить ингредиент</button>
     </div>
     <label>
-      <span>метод</span><br>
+      <span class="label">метод</span>
       <textarea
         class="input"
         v-model="method"
@@ -58,7 +58,7 @@
       </textarea>
     </label>
     <label>
-      <span>посуда</span><br>
+      <span class="label">посуда</span>
       <input
         class="input"
         type="text"
@@ -104,6 +104,7 @@ export default {
         id: this.selectedIngredient,
         amount: this.selectedAmount,
       });
+
       this.selectedIngredient = '';
       this.selectedAmount = '';
     },
@@ -135,7 +136,8 @@ export default {
 
     .ingredient-form {
       padding: 5px;
-      margin-bottom: 15px;
+      margin: 0;
+      margin-bottom: 10px;
       background-color: rgba(114, 221, 198, 0.4);
     }
 
@@ -153,10 +155,16 @@ export default {
       margin-right: 5px;
     }
 
+    .label {
+      display: block;
+      margin: 0;
+      margin-bottom: 5px;
+    }
+
     .input {
       width: 200px;
-      margin-top: 5px;
-      margin-bottom: 20px;
+      margin: 0;
+      margin-bottom: 10px;
     }
 
     .add-recipe-button {

@@ -56,15 +56,15 @@ export default {
   .ingredient-list {
     .category-title {
       font-size: 18px;
-      margin: 5px 0;
+      margin-bottom: 8px;
     }
 
     .ingredient {
       position: relative;
       width: 150px;
       padding: 8px;
-      margin: 5px;
-      margin-left: 0;
+      margin: 0;
+      margin-bottom: 5px;
       background-color: rgba(199, 128, 240, 0.2);
     }
 
