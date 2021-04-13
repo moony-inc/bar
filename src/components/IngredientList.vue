@@ -63,7 +63,6 @@ export default {
       position: relative;
       width: 150px;
       padding: 8px;
-      margin: 0;
       margin-bottom: 5px;
       background-color: rgba(199, 128, 240, 0.2);
     }
