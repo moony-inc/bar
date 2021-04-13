@@ -61,6 +61,7 @@ export default {
 
 <style lang="scss">
   .ingredients {
+    width: 250px;
 
     h1 {
       margin-top: 0;
@@ -68,14 +69,16 @@ export default {
     }
 
     form {
-      margin: 10px 0;
-      padding: 5px 0;
+      display: flex;
+      flex-direction: column;
+      width: 150px;
+      margin-top: 40px;
     }
 
     input,
     select,
     button {
-      margin: 5px;
+      margin-bottom: 10px;
     }
 
   }

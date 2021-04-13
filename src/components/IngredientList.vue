@@ -12,10 +12,11 @@
       >
         {{ ingredient.name }}
         <button
+          class="delete-ingredient-button"
           type="button"
           :disabled="usingIngredientInRecipesById(ingredient.id)"
           :title="usingIngredientInRecipesById(ingredient.id) ? 'ингредиент используется' : ''"
-          @click="deleteIngredient(ingredient)"
+          @click="deleteIngredient(ingredient.id)"
         >x</button>
       </div>
     </div>
@@ -55,15 +56,23 @@ export default {
   .ingredient-list {
 
     h2 {
-      margin: 5px 0;
       font-size: 18px;
+      margin: 5px 0;
     }
 
     .ingredient {
-      margin-left: 15px;
+      position: relative;
+      width: 150px;
+      padding: 8px;
+      margin: 5px;
+      margin-left: 0;
+      background-color: rgba(199, 128, 240, 0.2);
     }
 
-    button {
+    .delete-ingredient-button {
+      position: absolute;
+      top: 6px;
+      right: 5px;
       padding: 0 3px;
     }
 

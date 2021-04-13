@@ -40,8 +40,8 @@ export default new Vuex.Store({
     addIngredient(state, ingredient) {
       state.ingredients.push(ingredient);
     },
-    deleteIngredient(state, ingredient) {
-      state.ingredients = state.ingredients.filter(item => item.id !== ingredient.id);
+    deleteIngredient(state, ingredientId) {
+      state.ingredients = state.ingredients.filter(item => item.id !== ingredientId);
     },
     setRecipes(state, recipes) {
       state.recipes = recipes;
@@ -49,8 +49,8 @@ export default new Vuex.Store({
     addRecipe(state, recipe) {
       state.recipes.push(recipe);
     },
-    deleteRecipe(state, recipe) {
-      state.recipes = state.recipes.filter(item => item.id !== recipe.id);
+    deleteRecipe(state, recipeId) {
+      state.recipes = state.recipes.filter(item => item.id !== recipeId);
     },
   },
   actions: {
@@ -70,8 +70,8 @@ export default new Vuex.Store({
       commit('addIngredient', ingredient);
       dispatch('saveIngredientsLocalStorage');
     },
-    deleteIngredient({ commit, dispatch }, ingredient) {
-      commit('deleteIngredient', ingredient);
+    deleteIngredient({ commit, dispatch }, ingredientId) {
+      commit('deleteIngredient', ingredientId);
       dispatch('saveIngredientsLocalStorage');
     },
     setupRecipes({ commit }) {
@@ -85,8 +85,8 @@ export default new Vuex.Store({
       commit('addRecipe', recipe);
       dispatch('saveRecipesLocalStorage');
     },
-    deleteRecipe({ commit, dispatch }, recipe) {
-      commit('deleteRecipe', recipe);
+    deleteRecipe({ commit, dispatch }, recipeId) {
+      commit('deleteRecipe', recipeId);
       dispatch('saveRecipesLocalStorage');
     },
     // local storage methods

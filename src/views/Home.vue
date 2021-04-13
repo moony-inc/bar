@@ -24,13 +24,11 @@ export default {
     justify-content: flex-start;
 
     .ingredients {
-      margin: 20px;
-      padding: 20px;
+      padding: 30px;
     }
 
     .recipes {
-      margin: 20px;
-      padding: 20px;
+      padding: 30px;
     }
   }
 </style>

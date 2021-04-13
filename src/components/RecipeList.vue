@@ -19,7 +19,7 @@
       <button
         class="delete-recipe-button"
         type="button"
-        @click="deleteRecipe(recipe)"
+        @click="deleteRecipe(recipe.id)"
       >X</button>
     </div>
   </div>
@@ -51,9 +51,9 @@ export default {
 
     .recipe {
       position: relative;
-      margin-bottom: 20px;
       padding: 15px;
-      background-color: rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+      background-color: rgba(114, 221, 198, 0.3);
     }
 
     .recipe-title {
@@ -62,15 +62,11 @@ export default {
       margin-bottom: 5px;
     }
 
-    button {
-      padding: 0 3px;
-    }
-
     .delete-recipe-button {
       position: absolute;
       top: 10px;
       right: 10px;
+      padding: 0 3px;
     }
-
   }
 </style>

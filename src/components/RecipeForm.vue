@@ -4,7 +4,7 @@
     @submit.prevent="addRecipe"
   >
     <label>
-      <span>название</span>
+      <span>название</span><br>
       <input
         type="text"
         v-model="recipeName"
@@ -22,7 +22,10 @@
       </div>
       <label>
         <span>что</span>
-        <select v-model="selectedIngredient">
+        <select
+          class="resipe-ingredient-input"
+          v-model="selectedIngredient"
+        >
           <option
             v-for="ingredient in ingredients"
             :value="ingredient.id"
@@ -35,6 +38,7 @@
       <label>
         <span>сколько</span>
         <input
+          class="resipe-ingredient-input"
           type="text"
           v-model="selectedAmount"
         >
@@ -45,7 +49,7 @@
       >добавить ингредиент</button>
     </div>
     <label>
-      <span>метод</span>
+      <span>метод</span><br>
       <textarea
         v-model="method"
         required
@@ -53,19 +57,17 @@
       </textarea>
     </label>
     <label>
-      <span>посуда</span>
+      <span>посуда</span><br>
       <input
         type="text"
         v-model="drinkware"
         required
       >
     </label>
-    <div>
-      <button
-        class="add-recipe-button"
-        type="submit"
-      >добавить рецепт</button>
-    </div>
+    <button
+      class="add-recipe-button"
+      type="submit"
+    >добавить рецепт</button>
   </form>
 </template>
 
@@ -124,20 +126,40 @@ export default {
   .recipe-form {
     display: flex;
     flex-direction: column;
+    width: 400px;
+    padding: 10px;
+    background-color: rgba(114, 221, 198, 0.2);
 
-    label,
     .recipe-ingredients {
+      padding: 5px;
+      margin-bottom: 15px;
+      background-color: rgba(114, 221, 198, 0.4);
+    }
+
+    .recipe-ingredients-list {
+      margin-bottom: 5px;
+    }
+
+    .resipe-ingredient-input {
+      width: 100px;
+      margin-bottom: 8px;
+    }
+
+    span,
+    select {
+      margin-right: 5px;
+    }
+
+    input,
+    textarea {
+      width: 200px;
+      margin-top: 5px;
       margin-bottom: 20px;
     }
 
-    span {
-      padding: 5px;
-      padding-left: 0;
-    }
-
     .add-recipe-button {
+      align-self: center;
       padding: 8px;
-      margin-left: 60px;
     }
 
   }
