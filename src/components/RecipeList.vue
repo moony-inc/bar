@@ -5,17 +5,15 @@
       v-for="recipe in recipes"
       :key="recipe.id"
     >
-      <h2 class="title">{{ recipe.name }}</h2>
+      <h2 class="recipe-title">{{ recipe.name }}</h2>
       <span
         v-for="ingredient in recipe.ingredients"
         :key="ingredient.id"
       >
         {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
       </span>
-      <div>
-        {{"метод: "}} {{ recipe.method }}
-        {{"посуда: "}} {{ recipe.drinkware }}
-      </div>
+      <div>{{"метод: "}} {{ recipe.method }}</div>
+      <div>{{"посуда: "}} {{ recipe.drinkware }}</div>
       <button
         class="delete-button"
         type="button"
@@ -55,7 +53,7 @@ export default {
       background-color: rgba(114, 221, 198, 0.3);
     }
 
-    .title {
+    .recipe-title {
       font-size: 18px;
       margin: 0;
       margin-bottom: 5px;

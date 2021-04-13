@@ -12,7 +12,7 @@
         required
       >
     </label>
-    <div class="ingredient-form">
+    <div class="ingredient-section">
       <div class="ingredient-list">{{ "ингредиенты:" }}
         <span
           v-for="ingredient in recipeIngredients"
@@ -21,32 +21,52 @@
           {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
         </span>
       </div>
-      <label>
-        <span class="ingredient-label-text">что</span>
+      <div class="ingredient-form">
+        <label>
+          <span class="label-text">что</span>
+          <input
+            class="ingredient-input"
+            :value="ingredientName"
+            @input="updateIngredientName"
+          >
+        </label>
+        <label>
+          <span class="label-text">сколько</span>
+          <input
+            class="ingredient-input"
+            type="text"
+            v-model="ingredientAmount"
+          >
+        </label>
+        <button
+          class="add-ingredient-button"
+          @click.stop.prevent="addIngredientToRecipe"
+        >+</button>
+      </div>
+      <div
+        class="promt-area"
+        v-for="ingredient in suitableIngredients"
+        :key="ingredient.id"
+      >
+        <button @click="setIngredient(ingredient)">{{ ingredient.name }}</button>
+      </div>
+      <div
+        class="add-ingredient-form"
+        v-show="isNewIngredient"
+      >
         <select
-          class="ingredient-input"
-          v-model="selectedIngredient"
+          v-model="selectedCategory"
+          required
         >
           <option
-            v-for="ingredient in ingredients"
-            :value="ingredient.id"
-            :key="ingredient.id"
+            v-for="category in categories"
+            :value="category.value"
+            :key="category.value"
           >
-            {{ ingredient.name }}
+            {{ category.name }}
           </option>
         </select>
-      </label>
-      <label>
-        <span class="ingredient-label-text">сколько</span>
-        <input
-          class="ingredient-input"
-          type="text"
-          v-model="selectedAmount"
-        >
-      </label>
-      <button
-        @click.stop.prevent="addIngredientToRecipe"
-      >добавить ингредиент</button>
+      </div>
     </div>
     <label>
       <span class="label-text">метод</span>
@@ -69,6 +89,7 @@
     <button
       class="add-recipe-button"
       type="submit"
+      :disabled="!recipeIngredients.length"
     >добавить рецепт</button>
   </form>
 </template>
@@ -79,8 +100,10 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
   data: () => ({
     recipeName: '',
-    selectedIngredient: '',
-    selectedAmount: '',
+    ingredientName: '',
+    selectedCategory: '',
+    ingredientId: '',
+    ingredientAmount: '',
     recipeIngredients: [],
     method: '',
     drinkware: '',
@@ -89,24 +112,64 @@ export default {
     ...mapState([
       'recipes',
       'ingredients',
+      'categories',
     ]),
     ...mapGetters([
       'newRecipeId',
       'ingredientNameById',
+      'newIngredientId',
     ]),
+    suitableIngredients() {
+      let suitableIngredients = [];
+
+      if (this.ingredientName.length >= 2) {
+        suitableIngredients = this.ingredients
+          .filter(item => item.name.includes(this.ingredientName));
+      }
+
+      return suitableIngredients;
+    },
+    isNewIngredient() {
+      let isNewIngredient = false;
+
+      if (this.ingredientName.length > 0 && this.suitableIngredients.length === 0) {
+        isNewIngredient = true;
+      }
+
+      return isNewIngredient;
+    },
   },
   methods: {
     ...mapActions({
       addRecipeStore: 'addRecipe',
+      addIngredient: 'addIngredient',
     }),
+    updateIngredientName(event) {
+      this.ingredientName = event.target.value;
+    },
+    setIngredient(ingredient) {
+      this.ingredientName = ingredient.name;
+      this.ingredientId = ingredient.id;
+    },
     addIngredientToRecipe() {
+      if (this.isNewIngredient) {
+        const newId = this.newIngredientId;
+        this.addIngredient({
+          name: this.ingredientName,
+          category: this.selectedCategory,
+          availability: true,
+          id: newId,
+        });
+        this.ingredientId = newId;
+      }
+
       this.recipeIngredients.push({
-        id: this.selectedIngredient,
-        amount: this.selectedAmount,
+        id: this.ingredientId,
+        amount: this.ingredientAmount,
       });
 
-      this.selectedIngredient = '';
-      this.selectedAmount = '';
+      this.ingredientName = '';
+      this.ingredientAmount = '';
     },
     addRecipe() {
       this.addRecipeStore({
@@ -130,28 +193,37 @@ export default {
   .recipe-form {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 350px;
     padding: 10px;
     background-color: rgba(114, 221, 198, 0.2);
 
-    .ingredient-form {
-      padding: 5px;
-      margin-bottom: 10px;
+    .ingredient-section {
       background-color: rgba(114, 221, 198, 0.4);
     }
 
     .ingredient-list {
-      margin-bottom: 5px;
+      padding: 5px;
+    }
+
+    .ingredient-form {
+      display: flex;
+      padding: 5px;
     }
 
     .ingredient-input {
-      width: 100px;
-      margin-bottom: 8px;
-      margin-right: 5px;
+      width: 120px;
+      margin-bottom: 10px;
+      margin-right: 10px;
     }
 
-    .ingredient-label-text {
-      margin-right: 5px;
+    .add-ingredient-button {
+      align-self: center;
+    }
+
+    .promt-area {
+      height: 20px;
+      padding: 5px;
+      margin-bottom: 10px;
     }
 
     .label-text {
