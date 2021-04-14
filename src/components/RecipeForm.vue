@@ -26,6 +26,7 @@
           <span class="label-text">что</span>
           <input
             class="ingredient-input"
+            type="text"
             :value="ingredientName"
             @input="updateIngredientName"
           >

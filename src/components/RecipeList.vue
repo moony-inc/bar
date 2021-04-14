@@ -1,8 +1,37 @@
 <template>
   <div class="recipe-list">
+    <div class="display-modes">
+      <label>
+        <span>все</span>
+        <input
+          type="radio"
+          name="display-mode"
+          value="recipes"
+          v-model="displayMode"
+        >
+      </label>
+      <label>
+        <span>могу сделать</span>
+        <input
+          type="radio"
+          name="display-mode"
+          value="can-do"
+          v-model="displayMode"
+        >
+      </label>
+      <label>
+        <span>почти могу сделать</span>
+        <input
+          type="radio"
+          name="display-mode"
+          value="almost-can-do"
+          v-model="displayMode"
+        >
+      </label>
+    </div>
     <div
       class="recipe"
-      v-for="recipe in recipes"
+      v-for="recipe in recipesToShow"
       :key="recipe.id"
     >
       <h2 class="recipe-title">{{ recipe.name }}</h2>
@@ -27,6 +56,9 @@
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
+  data: () => ({
+    displayMode: 'recipes',
+  }),
   computed: {
     ...mapState([
       'recipes',
@@ -35,6 +67,26 @@ export default {
     ...mapGetters([
       'ingredientNameById',
     ]),
+    recipesToShow() {
+      let recipesToShow = [];
+
+      switch (this.displayMode) {
+        case 'can-do':
+          recipesToShow = this.recipes
+            .filter(recipe => !this.ingredients
+              .some(ingredient => (
+                recipe.ingredients.some(item => item.id === ingredient.id)
+                && !ingredient.availability
+              )));
+          break;
+        case 'almost-can-do':
+          break;
+        default:
+          recipesToShow = this.recipes;
+      }
+
+      return recipesToShow;
+    },
   },
   methods: {
     ...mapActions([

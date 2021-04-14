@@ -53,7 +53,7 @@ export default {
       this.addIngredientStore({
         name: this.ingredientName,
         category: this.selectedCategory,
-        availability: true,
+        availability: false,
         id: this.newIngredientId,
       });
       this.ingredientName = '';
