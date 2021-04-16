@@ -1,53 +1,39 @@
 <template>
   <div class="recipe-list">
     <div class="display-modes">
-      <label>
-        <span>все</span>
+      <label
+        v-for="mode in displayModes"
+        :key="mode.value"
+      >
+        <span>{{ mode.title }}</span>
         <input
           type="radio"
-          name="display-mode"
-          value="recipes"
-          v-model="displayMode"
-        >
-      </label>
-      <label>
-        <span>могу сделать</span>
-        <input
-          type="radio"
-          name="display-mode"
-          value="can-do"
-          v-model="displayMode"
-        >
-      </label>
-      <label>
-        <span>почти могу сделать</span>
-        <input
-          type="radio"
-          name="display-mode"
-          value="almost-can-do"
+          :value="mode.value"
           v-model="displayMode"
         >
       </label>
     </div>
-    <div
-      class="recipe"
-      v-for="recipe in recipesToShow"
-      :key="recipe.id"
-    >
-      <h2 class="recipe-title">{{ recipe.name }}</h2>
-      <span
-        v-for="ingredient in recipe.ingredients"
-        :key="ingredient.id"
+    <div>
+      <div
+        class="recipe"
+        v-for="recipe in recipesToShow"
+        :key="recipe.id"
       >
-        {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
-      </span>
-      <div>{{"метод: "}} {{ recipe.method }}</div>
-      <div>{{"посуда: "}} {{ recipe.drinkware }}</div>
-      <button
-        class="delete-button"
-        type="button"
-        @click="deleteRecipe(recipe.id)"
-      >X</button>
+        <h2 class="recipe-title">{{ recipe.name }}</h2>
+        <span
+          v-for="ingredient in recipe.ingredients"
+          :key="ingredient.id"
+        >
+          {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
+        </span>
+        <div>{{"метод: "}} {{ recipe.method }}</div>
+        <div>{{"посуда: "}} {{ recipe.drinkware }}</div>
+        <button
+          class="delete-button"
+          type="button"
+          @click="deleteRecipe(recipe.id)"
+        >X</button>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +43,20 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   data: () => ({
+    displayModes: [
+      {
+        title: 'все',
+        value: 'recipes',
+      },
+      {
+        title: 'могу сделать',
+        value: 'can-do',
+      },
+      {
+        title: 'почти могу сделать',
+        value: 'almost-can-do',
+      },
+    ],
     displayMode: 'recipes',
   }),
   computed: {
