@@ -20,12 +20,13 @@
         :key="recipe.id"
       >
         <h2 class="recipe-title">{{ recipe.name }}</h2>
-        <span
+        <div
           v-for="ingredient in recipe.ingredients"
           :key="ingredient.id"
+          :class="{ absent: ingredient.absence }"
         >
           {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
-        </span>
+        </div>
         <div>{{"метод: "}} {{ recipe.method }}</div>
         <div>{{"посуда: "}} {{ recipe.drinkware }}</div>
         <button
@@ -41,6 +42,10 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
 
+const RECIPE_INGREDIENTS_CHECKPOINT = 5;
+const LOWER_CHECKPOINT_COEFFICIENT = 0.5;
+const HIGHER_CHECKPOINT_COEFFICIENT = 0.4;
+
 export default {
   data: () => ({
     displayModes: [
@@ -53,7 +58,7 @@ export default {
         value: 'can-do',
       },
       {
-        title: 'почти могу сделать',
+        title: 'чего-то не хватает',
         value: 'almost-can-do',
       },
     ],
@@ -79,8 +84,37 @@ export default {
                 && !ingredient.availability
               )));
           break;
-        case 'almost-can-do':
+        case 'almost-can-do': {
+          const filteredRecipes = this.recipes.filter(recipe => {
+            let limit = 0;
+            const absentIngredients = recipe.ingredients.reduce((sum, item) => (
+              this.checkIngredientAvailability(item.id) ? sum : sum + 1),
+            0);
+
+            if (absentIngredients) {
+              limit = recipe.ingredients.length * (
+                absentIngredients < RECIPE_INGREDIENTS_CHECKPOINT
+                  ? LOWER_CHECKPOINT_COEFFICIENT
+                  : HIGHER_CHECKPOINT_COEFFICIENT
+              );
+            }
+
+            return absentIngredients && absentIngredients <= limit;
+          });
+
+          recipesToShow = filteredRecipes.map(recipe => {
+            const modifiedIngredients = recipe.ingredients.map(item => ({
+              ...item,
+              absence: !this.checkIngredientAvailability(item.id),
+            }));
+
+            return {
+              ...recipe,
+              ingredients: modifiedIngredients,
+            };
+          });
           break;
+        }
         default:
           recipesToShow = this.recipes;
       }
@@ -92,6 +126,9 @@ export default {
     ...mapActions([
       'deleteRecipe',
     ]),
+    checkIngredientAvailability(ingredientId) {
+      return this.ingredients.find(item => item.id === ingredientId).availability;
+    },
   },
 };
 </script>
@@ -116,6 +153,10 @@ export default {
       top: 10px;
       right: 10px;
       padding: 0 3px;
+    }
+
+    .absent {
+      background-color: rgba(188, 224, 24, 0.281);
     }
   }
 </style>
