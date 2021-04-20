@@ -52,11 +52,11 @@
           class="add-ingredient-button"
           type="submit"
         >+</button>
-        <div v-if="infoMessage">{{ infoMessage }}</div>
         <div
           class="suggestions-area"
-          v-if="!this.isNewIngredientManual"
+          v-if="!isNewIngredientManual && suitableIngredients.length"
         >
+          <div>{{ infoMessage }}</div>
           <button
             v-for="ingredient in suitableIngredients"
             :key="ingredient.id"
@@ -189,6 +189,7 @@ export default {
     updateIngredientName(event) {
       this.ingredient.name = event.target.value;
       this.ingredient.id = null;
+      this.isNewIngredientManual = false;
     },
     setIngredient(ingredient) {
       this.ingredient = {
