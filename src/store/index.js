@@ -40,6 +40,9 @@ export default new Vuex.Store({
     addIngredient(state, ingredient) {
       state.ingredients.push(ingredient);
     },
+    setIngredientAvailability(state, { ingredientId, value }) {
+      state.ingredients.find(item => item.id === ingredientId).availability = value;
+    },
     deleteIngredient(state, ingredientId) {
       state.ingredients = state.ingredients.filter(item => item.id !== ingredientId);
     },
@@ -59,27 +62,17 @@ export default new Vuex.Store({
         commit('setCategories', data);
       });
     },
-    setupIngredients({ commit }) {
-      const localIngredients = localStorage.getItem('ingredients');
-
-      if (localIngredients) {
-        commit('setIngredients', JSON.parse(localIngredients));
-      }
-    },
     addIngredient({ commit, dispatch }, ingredient) {
       commit('addIngredient', ingredient);
+      dispatch('saveIngredientsLocalStorage');
+    },
+    setIngredientAvailability({ commit, dispatch }, { ingredientId, value }) {
+      commit('setIngredientAvailability', { ingredientId, value });
       dispatch('saveIngredientsLocalStorage');
     },
     deleteIngredient({ commit, dispatch }, ingredientId) {
       commit('deleteIngredient', ingredientId);
       dispatch('saveIngredientsLocalStorage');
-    },
-    setupRecipes({ commit }) {
-      const localRecipes = localStorage.getItem('recipes');
-
-      if (localRecipes) {
-        commit('setRecipes', JSON.parse(localRecipes));
-      }
     },
     addRecipe({ commit, dispatch }, recipe) {
       commit('addRecipe', recipe);
@@ -90,6 +83,20 @@ export default new Vuex.Store({
       dispatch('saveRecipesLocalStorage');
     },
     // local storage methods
+    setupIngredients({ commit }) {
+      const localIngredients = localStorage.getItem('ingredients');
+
+      if (localIngredients) {
+        commit('setIngredients', JSON.parse(localIngredients));
+      }
+    },
+    setupRecipes({ commit }) {
+      const localRecipes = localStorage.getItem('recipes');
+
+      if (localRecipes) {
+        commit('setRecipes', JSON.parse(localRecipes));
+      }
+    },
     saveIngredientsLocalStorage({ state }) {
       localStorage.setItem('ingredients', JSON.stringify(state.ingredients));
     },

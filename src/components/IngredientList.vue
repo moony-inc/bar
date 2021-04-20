@@ -10,7 +10,17 @@
         v-for="ingredient in ingredientsByCategory(category)"
         :key="ingredient.id"
       >
-        {{ ingredient.name }}
+        <label>
+          <span>{{ ingredient.name }}</span>
+          <input
+            type="checkbox"
+            :checked="ingredient.availability"
+            @change="setIngredientAvailability({
+              ingredientId: ingredient.id,
+              value: $event.target.checked,
+            })"
+          >
+        </label>
         <button
           class="delete-button"
           type="button"
@@ -46,6 +56,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'setIngredientAvailability',
       'deleteIngredient',
     ]),
   },
