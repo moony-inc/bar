@@ -9,6 +9,11 @@ export default new Vuex.Store({
     recipes: [],
     ingredients: [],
     categories: [],
+    sidebar: {
+      isShown: false,
+      mode: '',
+    },
+    recipeIdForEditing: null,
   },
   getters: {
     newIngredientId: state => (state.ingredients.length
@@ -18,6 +23,7 @@ export default new Vuex.Store({
       ? state.recipes[state.recipes.length - 1].id + 1
       : 0),
     ingredientNameById: state => id => state.ingredients.find(item => item.id === id).name,
+    recipeById: state => id => state.recipes.find(item => item.id === id),
     usingIngredientInRecipesById: state => id => {
       let ingredientIsUsed = false;
 
@@ -52,8 +58,24 @@ export default new Vuex.Store({
     addRecipe(state, recipe) {
       state.recipes.push(recipe);
     },
+    updateRecipe(state, recipe) {
+      const index = state.recipes.findIndex(item => item.id === recipe.id);
+
+      Vue.set(state.recipes, index, recipe);
+    },
     deleteRecipe(state, recipeId) {
       state.recipes = state.recipes.filter(item => item.id !== recipeId);
+    },
+    showSidebar(state, mode) {
+      state.sidebar.isShown = true;
+      state.sidebar.mode = mode;
+    },
+    hideSidebar(state) {
+      state.sidebar.isShown = false;
+      state.sidebar.mode = '';
+    },
+    setRecipeIdForEditing(state, recipeId) {
+      state.recipeIdForEditing = recipeId;
     },
   },
   actions: {
@@ -76,6 +98,10 @@ export default new Vuex.Store({
     },
     addRecipe({ commit, dispatch }, recipe) {
       commit('addRecipe', recipe);
+      dispatch('saveRecipesLocalStorage');
+    },
+    updateRecipe({ commit, dispatch }, recipe) {
+      commit('updateRecipe', recipe);
       dispatch('saveRecipesLocalStorage');
     },
     deleteRecipe({ commit, dispatch }, recipeId) {

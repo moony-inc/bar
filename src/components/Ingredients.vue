@@ -1,28 +1,39 @@
 <template>
   <div class="ingredients">
-    <h1 class="title">ингредиенты</h1>
     <IngredientList />
     <form
       class="add-form"
       @submit.prevent="addIngredient"
     >
-      <input
-        type="text"
-        v-model="ingredientName"
-      >
-      <select
-        v-model="selectedCategory"
-        required
-      >
-        <option
-          v-for="category in categories"
-          :value="category.value"
-          :key="category.value"
+      <h2 class="form-title">новый игредиент</h2>
+      <label>
+        <span class="label-text">ингредиент</span>
+        <input
+          class="name-input"
+          type="text"
+          v-model="ingredientName"
         >
-          {{ category.name }}
-        </option>
-      </select>
-      <button type="submit">добавить</button>
+      </label>
+      <label>
+        <span class="label-text">категория</span>
+        <select
+          class="category-input"
+          v-model="selectedCategory"
+          required
+        >
+          <option
+            v-for="category in categories"
+            :value="category.value"
+            :key="category.value"
+          >
+            {{ category.name }}
+          </option>
+        </select>
+      </label>
+      <button
+      class="add-button"
+        type="submit"
+      >+</button>
     </form>
   </div>
 </template>
@@ -57,6 +68,7 @@ export default {
         id: this.newIngredientId,
       });
       this.ingredientName = '';
+      this.selectedCategory = '';
     },
   },
 };
@@ -65,20 +77,77 @@ export default {
 <style lang="scss">
   .ingredients {
     width: 250px;
-    padding: 30px;
-
-    .title {
-      margin-top: 0;
-      font-size: 22px;
-    }
+    margin-left: auto;
+    margin-right: auto;
 
     .add-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 150px;
-      height: 80px;
-      margin-top: 40px;
+      width: 230px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-title {
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .label-text {
+      display: block;
+      font-size: 13px;
+    }
+
+    .name-input,
+    .category-input {
+      margin-bottom: 15px;
+      padding: 10px 5px 3px;
+      border: none;
+      border-bottom: 1px solid $black;
+      outline: none;
+      background-color: transparent;
+    }
+
+    .name-input {
+      width: 230px;
+    }
+
+    .category-input {
+      width: 200px;
+      margin-right: 10px;
+    }
+
+    .add-button {
+      display: inline-block;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border: none;
+      background-color: transparent;
+      color: transparent;
+      cursor: pointer;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 50%;
+        width: 1px;
+        height: 18px;
+        background-color: $black;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 50%;
+        width: 1px;
+        height: 18px;
+        background-color: $black;
+        transform: rotate(90deg);
+      }
     }
   }
 </style>

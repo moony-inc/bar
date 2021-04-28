@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+html {
+  margin-right: calc(-1 * (100vw - 100%));
+  overflow-x: hidden;
+}
+
+body {
+  background-color: $background;
+}
+
+.semibold {
+  font-weight: 600;
+}
