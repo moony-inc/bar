@@ -17,11 +17,9 @@
     </div>
     <div class="sidebar-content">
       <transition name="delay">
-        <div v-if="sidebar.mode === 'recipe-form'">
-          <RecipeForm />
-        </div>
-        <div v-else-if="sidebar.mode === 'ingredients'">
-          <Ingredients />
+        <div v-if="sidebar.mode">
+          <RecipeForm v-if="sidebar.mode === 'recipe-form'" />
+          <Ingredients v-if="sidebar.mode === 'ingredients'" />
         </div>
       </transition>
     </div>
@@ -47,6 +45,7 @@ export default {
     ]),
     openAddRecipeForm() {
       this.showSidebar('recipe-form');
+
       if (this.recipeIdForEditing !== null) {
         this.setRecipeIdForEditing(null);
       }
@@ -80,14 +79,11 @@ export default {
     .recipe-form-button,
     .ingredients-button {
       padding: 5px 10px;
-      border: none;
-      background-color: $main-2;
-      cursor: pointer;
-      transition-duration: 0.3s;
+      background-color: $color-main-2;
+      transition: background-color 0.3s;
 
       &.active {
-        border: none;
-        background-color: $secondary;
+        background-color: $color-secondary;
       }
     }
 
@@ -99,15 +95,7 @@ export default {
       height: 100vh;
       padding: 40px 30px 100px;
       overflow: auto;
-      background-color: $main-2;
-    }
-
-    .delay-leave {
-      opacity: 1;
-    }
-
-    .delay-leave-active {
-      transition: opacity 0.5s;
+      background-color: $color-main-2;
     }
   }
 </style>

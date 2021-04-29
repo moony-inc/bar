@@ -1,11 +1,33 @@
-* {
+// reset styles
+
+*,
+::after,
+::before {
   box-sizing: border-box;
+}
+
+h1,
+h2 {
   margin: 0;
   padding: 0;
-  font-family: 'Raleway', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.3px;
 }
+
+input,
+select,
+textarea {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  letter-spacing: inherit;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+// general styles
 
 html {
   margin-right: calc(-1 * (100vw - 100%));
@@ -13,9 +35,28 @@ html {
 }
 
 body {
-  background-color: $background;
+  background-color: $color-background;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.3px;
 }
 
-.semibold {
-  font-weight: 600;
+// vue-transitions
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.delay-leave {
+  opacity: 1;
+}
+
+.delay-leave-active {
+  transition: opacity 0.5s;
 }

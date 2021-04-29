@@ -37,21 +37,23 @@
             v-for="ingredient in recipe.ingredients"
             :key="ingredient.id"
           >
-            {{ ingredientNameById(ingredient.id) + ' - ' }} {{ ingredient.amount }}
+            {{ ingredientNameById(ingredient.id)}} - {{ ingredient.amount }}
           </div>
         </div>
-        <div class="method"><span class="semibold">{{"метод: "}}</span>{{ recipe.method }}</div>
-        <div><span class="semibold">{{"посуда: "}}</span>{{ recipe.drinkware }}</div>
-        <button
-          class="edit-button"
-          type="button"
-          @click.stop="editRecipe(recipe.id)"
-        >edit</button>
-        <button
-          class="delete-button"
-          type="button"
-          @click="deleteRecipe(recipe.id)"
-        >X</button>
+        <div class="method"><b>{{"метод: "}}</b>{{ recipe.method }}</div>
+        <div><b>{{"посуда: "}}</b>{{ recipe.drinkware }}</div>
+        <div class="buttons-container">
+          <button
+            class="edit-button"
+            type="button"
+            @click.stop="editRecipe(recipe.id)"
+          >edit</button>
+          <button
+            class="delete-button"
+            type="button"
+            @click="deleteRecipe(recipe.id)"
+          ></button>
+        </div>
       </div>
     </masonry>
   </div>
@@ -191,7 +193,7 @@ export default {
 
     .radio-button {
       position: absolute;
-      z-index: -1;
+      visibility: hidden;
       opacity: 0;
     }
 
@@ -200,16 +202,16 @@ export default {
       margin-right: 10px;
       padding: 5px 10px;
       border: none;
-      background-color: $main-2;
+      background-color: $color-main-2;
       cursor: pointer;
-      transition-duration: 0.2s;
+      transition: background-color 0.2s;
 
       &:hover {
-        background-color: $main-2-light;
+        background-color: $color-main-2-light;
       }
 
       &.active {
-        background-color: $secondary;
+        background-color: $color-secondary;
       }
     }
 
@@ -230,14 +232,12 @@ export default {
         z-index: -1;
         width: 100%;
         height: 100%;
-        background-color: $main-1;
+        background-color: $color-main-1;
         transition: transform 0.3s;
       }
 
       &:hover {
-        .edit-button,
-        .delete-button
-          {
+        .buttons-container {
           opacity: 1;
         }
 
@@ -257,7 +257,7 @@ export default {
       width: 105%;
       margin-bottom: 15px;
       padding: 5px;
-      background-color: $main-1-light;
+      background-color: $color-main-1-light;
     }
 
     .ingredient {
@@ -265,7 +265,7 @@ export default {
       padding: 3px 4px;
 
       &.absent {
-        background-color: $secondary-highlight;
+        background-color: $color-secondary-highlight;
       }
     }
 
@@ -274,43 +274,25 @@ export default {
       line-height: 1.4;
     }
 
-    .edit-button {
+    .buttons-container {
       position: absolute;
       top: 15px;
-      right: 35px;
-      padding: 5px;
-      border: none;
+      right: 10px;
       opacity: 0;
-      background-color: transparent;
-      cursor: pointer;
       transition: opacity 0.3s;
     }
 
+    .edit-button {
+      padding: 5px;
+    }
+
     .delete-button {
-      position: absolute;
-      top: 20px;
-      right: 10px;
+      position: relative;
       width: 20px;
       height: 20px;
-      border: none;
-      opacity: 0;
-      background-color: transparent;
-      color: transparent;
-      cursor: pointer;
-      transition: opacity 0.3s;
+      vertical-align: middle;
 
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 1px;
-        right: 8px;
-        width: 1px;
-        height: 15px;
-        background-color: $black;
-        transform: rotate(45deg);
-      }
-
+      &::before,
       &::after {
         content: '';
         display: block;
@@ -320,6 +302,13 @@ export default {
         width: 1px;
         height: 15px;
         background-color: $black;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
         transform: rotate(-45deg);
       }
     }

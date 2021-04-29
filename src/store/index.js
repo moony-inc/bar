@@ -24,7 +24,7 @@ export default new Vuex.Store({
       : 0),
     ingredientNameById: state => id => state.ingredients.find(item => item.id === id).name,
     recipeById: state => id => state.recipes.find(item => item.id === id),
-    usingIngredientInRecipesById: state => id => {
+    usedIngredientInRecipeById: state => id => {
       let ingredientIsUsed = false;
 
       state.recipes.forEach(item => item.ingredients.forEach(element => {

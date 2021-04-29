@@ -2,7 +2,8 @@
   <div class="home">
     <RecipeList
       class="main-content"
-      :class="{ parallax: sidebar.isShown }" />
+      :class="{ parallax: sidebar.isShown }"
+    />
     <Sidebar />
   </div>
 </template>

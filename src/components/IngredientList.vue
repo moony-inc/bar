@@ -13,7 +13,6 @@
           :key="ingredient.id"
         >
           <label class="availability-button">
-            <span>{{ ingredient.name }}</span>
             <input
               class="checkbox"
               type="checkbox"
@@ -23,14 +22,15 @@
                 value: $event.target.checked,
               })"
             >
+            <span>{{ ingredient.name }}</span>
           </label>
           <button
             class="delete-button"
             type="button"
-            :disabled="usingIngredientInRecipesById(ingredient.id)"
-            :title="usingIngredientInRecipesById(ingredient.id) ? 'ингредиент используется' : ''"
+            :disabled="usedIngredientInRecipeById(ingredient.id)"
+            :title="usedIngredientInRecipeById(ingredient.id) ? 'ингредиент используется' : ''"
             @click="deleteIngredient(ingredient.id)"
-          >x</button>
+          ></button>
         </div>
       </transition-group>
     </div>
@@ -47,12 +47,12 @@ export default {
       'categories',
     ]),
     ...mapGetters([
-      'usingIngredientInRecipesById',
+      'usedIngredientInRecipeById',
     ]),
     categoriesToShow() {
       return this.categories
         .filter(category => this.ingredients
-          .find(ingredient => ingredient.category === category.value));
+          .some(ingredient => ingredient.category === category.value));
     },
     ingredientsByCategory() {
       return category => this.ingredients.filter(item => item.category === category.value);
@@ -101,8 +101,6 @@ export default {
 
     .availability-button {
       display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
       align-items: center;
     }
 
@@ -117,25 +115,10 @@ export default {
       right: 10px;
       width: 20px;
       height: 20px;
-      border: none;
       opacity: 0;
-      background-color: transparent;
-      color: transparent;
-      cursor: pointer;
       transition: opacity 0.3s;
 
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 1px;
-        right: 8px;
-        width: 1px;
-        height: 15px;
-        background-color: $black;
-        transform: rotate(45deg);
-      }
-
+      &::before,
       &::after {
         content: '';
         display: block;
@@ -145,6 +128,13 @@ export default {
         width: 1px;
         height: 15px;
         background-color: $black;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
         transform: rotate(-45deg);
       }
 
@@ -156,16 +146,6 @@ export default {
           background-color: $gray-dark;
         }
       }
-    }
-
-    .fade-enter-active,
-    .fade-leave-active {
-      transition: opacity 0.3s;
-    }
-
-    .fade-enter,
-    .fade-leave-to {
-      opacity: 0;
     }
   }
 </style>

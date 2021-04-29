@@ -31,9 +31,9 @@
         </select>
       </label>
       <button
-      class="add-button"
+        class="add-button"
         type="submit"
-      >+</button>
+      ></button>
     </form>
   </div>
 </template>
@@ -101,10 +101,7 @@ export default {
     .category-input {
       margin-bottom: 15px;
       padding: 10px 5px 3px;
-      border: none;
       border-bottom: 1px solid $black;
-      outline: none;
-      background-color: transparent;
     }
 
     .name-input {
@@ -121,12 +118,9 @@ export default {
       position: relative;
       width: 20px;
       height: 20px;
-      border: none;
-      background-color: transparent;
-      color: transparent;
-      cursor: pointer;
 
-      &::before {
+      &::before,
+      &::after {
         content: '';
         display: block;
         position: absolute;
@@ -138,14 +132,6 @@ export default {
       }
 
       &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 50%;
-        width: 1px;
-        height: 18px;
-        background-color: $black;
         transform: rotate(90deg);
       }
     }

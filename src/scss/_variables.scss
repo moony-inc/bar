@@ -3,11 +3,11 @@ $gray-dark: lighten($black, 50%);
 $gray-light: lighten($black, 80%);
 $white: #fff;
 
-$background: #c3b8a680;
+$color-background: rgba(195, 184, 166, 0.5);
 
-$main-1: #BAB8C2;
-$main-1-light: lighten($main-1, $amount: 6);
-$main-2: #f0e6ba;
-$main-2-light: lighten($main-2, $amount: 6);
-$secondary: #FFC69E;
-$secondary-highlight: #ffc69e86;
+$color-main-1: #BAB8C2;
+$color-main-1-light: lighten($color-main-1, $amount: 6);
+$color-main-2: #f0e6ba;
+$color-main-2-light: lighten($color-main-2, $amount: 6);
+$color-secondary: #FFC69E;
+$color-secondary-highlight: rgba($color-secondary, 0.5);
