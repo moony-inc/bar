@@ -37,11 +37,11 @@
             v-for="ingredient in recipe.ingredients"
             :key="ingredient.id"
           >
-            {{ ingredientNameById(ingredient.id)}} - {{ ingredient.amount }}
+            {{ ingredientNameById(ingredient.id) }} - {{ ingredient.amount }}
           </div>
         </div>
-        <div class="method"><b>{{"метод: "}}</b>{{ recipe.method }}</div>
-        <div><b>{{"посуда: "}}</b>{{ recipe.drinkware }}</div>
+        <div class="method"><b>метод: </b>{{ recipe.method }}</div>
+        <div><b>посуда: "</b>{{ recipe.drinkware }}</div>
         <div class="buttons-container">
           <button
             class="edit-button"
@@ -192,7 +192,8 @@ export default {
     }
 
     .radio-button {
-      position: absolute;
+      width: 0;
+      height: 0;
       visibility: hidden;
       opacity: 0;
     }
@@ -201,7 +202,6 @@ export default {
       display: block;
       margin-right: 10px;
       padding: 5px 10px;
-      border: none;
       background-color: $color-main-2;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -220,12 +220,10 @@ export default {
       flex-direction: column;
       position: relative;
       margin-bottom: 30px;
-      padding: 25px;
-      padding-top: 20px;
+      padding: 20px 25px 25px;
 
       &::before {
         content: '';
-        display: block;
         position: absolute;
         top: 0;
         left: 0;
@@ -275,6 +273,8 @@ export default {
     }
 
     .buttons-container {
+      display: flex;
+      align-items: center;
       position: absolute;
       top: 15px;
       right: 10px;
@@ -290,12 +290,10 @@ export default {
       position: relative;
       width: 20px;
       height: 20px;
-      vertical-align: middle;
 
       &::before,
       &::after {
         content: '';
-        display: block;
         position: absolute;
         top: 1px;
         right: 8px;

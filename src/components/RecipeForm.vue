@@ -18,7 +18,7 @@
       <span class="label-text">метод</span>
       <textarea
         class="input"
-        rows="1"
+        rows="2"
         v-model="method"
         required
       >
@@ -73,7 +73,7 @@ export default {
   },
   watch: {
     recipeIdForEditing: {
-      handler: function a() {
+      handler: function recipeIdForEdittindHandler() {
         this.setRecipeForEditing();
       },
       immediate: true,
@@ -142,13 +142,14 @@ export default {
 
     .label-text {
       display: block;
+      margin-bottom: 5px;
       font-size: 13px;
     }
 
     .input {
       width: 250px;
       margin-bottom: 20px;
-      padding: 10px 5px 3px;
+      padding: 5px 5px 3px;
       border-bottom: 1px solid $black;
     }
 

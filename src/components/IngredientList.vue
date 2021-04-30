@@ -121,7 +121,6 @@ export default {
       &::before,
       &::after {
         content: '';
-        display: block;
         position: absolute;
         top: 1px;
         right: 8px;

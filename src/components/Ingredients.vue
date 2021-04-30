@@ -9,7 +9,7 @@
       <label>
         <span class="label-text">ингредиент</span>
         <input
-          class="name-input"
+          class="input-name"
           type="text"
           v-model="ingredientName"
         >
@@ -17,7 +17,7 @@
       <label>
         <span class="label-text">категория</span>
         <select
-          class="category-input"
+          class="input-category"
           v-model="selectedCategory"
           required
         >
@@ -97,18 +97,18 @@ export default {
       font-size: 13px;
     }
 
-    .name-input,
-    .category-input {
+    .input-name,
+    .input-category {
       margin-bottom: 15px;
       padding: 10px 5px 3px;
       border-bottom: 1px solid $black;
     }
 
-    .name-input {
+    .input-name {
       width: 230px;
     }
 
-    .category-input {
+    .input-category {
       width: 200px;
       margin-right: 10px;
     }
@@ -122,7 +122,6 @@ export default {
       &::before,
       &::after {
         content: '';
-        display: block;
         position: absolute;
         top: 0;
         right: 50%;

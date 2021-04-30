@@ -2,22 +2,20 @@
   <div class="recipe-ingredients-section">
     <div class="list">
       <h2 class="list-title">ингредиенты</h2>
-      <transition-group name="fade">
-        <div
-          class="ingredient"
-          v-for="ingredient in recipeIngredients"
-          :key="ingredient.id"
-        >
-          <div class="ingredient-name">
-            {{ ingredientNameById(ingredient.id) }} - {{ ingredient.amount }}
-          </div>
-          <button
-            class="delete-ingredient-button"
-            type="button"
-            @click="deleteIngredientFromRecipe(ingredient.id)"
-          ></button>
+      <div
+        class="ingredient"
+        v-for="ingredient in recipeIngredients"
+        :key="ingredient.id"
+      >
+        <div class="ingredient-name">
+          {{ ingredientNameById(ingredient.id) }} - {{ ingredient.amount }}
         </div>
-      </transition-group>
+        <button
+          class="delete-ingredient-button"
+          type="button"
+          @click="deleteIngredientFromRecipe(ingredient.id)"
+        ></button>
+      </div>
     </div>
     <form
       class="form"
@@ -47,7 +45,7 @@
         class="add-ingredient-button"
         type="submit"
       ></button>
-      <transition name="fade">
+      <transition name="fade" mode="out-in">
         <div
           class="suggestions-area"
           v-if="!isNewIngredientManual && suitableIngredients.length"
@@ -97,12 +95,6 @@ const INGREDIENT_SUGGESTIONS_LIMIT = 4;
 const INGREDIENT_SUGGESTIONS_DELAY = 300;
 
 export default {
-  created() {
-    this.recipeIngredientsLocal = this.recipeIngredients;
-  },
-  updated() {
-    this.recipeIngredientsLocal = this.recipeIngredients;
-  },
   model: {
     prop: 'recipeIngredients',
     event: 'change',
@@ -159,6 +151,12 @@ export default {
       },
       deep: true,
     },
+  },
+  created() {
+    this.recipeIngredientsLocal = this.recipeIngredients;
+  },
+  updated() {
+    this.recipeIngredientsLocal = this.recipeIngredients;
   },
   methods: {
     ...mapActions([
@@ -273,7 +271,6 @@ export default {
       &::before,
       &::after {
         content: '';
-        display: block;
         position: absolute;
         top: 3px;
         right: 6px;
@@ -315,7 +312,6 @@ export default {
       &::before,
       &::after {
         content: '';
-        display: block;
         position: absolute;
         top: 0;
         right: 50%;

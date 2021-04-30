@@ -27,10 +27,10 @@ export default {
   .home {
     .main-content {
       transition: transform 0.8s;
-    }
 
-    .parallax {
-      transform: translateX(-20px);
+      &.parallax {
+        transform: translateX(-20px);
+      }
     }
   }
 </style>
