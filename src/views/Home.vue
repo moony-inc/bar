@@ -1,22 +1,36 @@
 <template>
   <div class="home">
-    <Ingredients />
-    <Recipes />
+    <RecipeList
+      class="main-content"
+      :class="{ parallax: sidebar.isShown }"
+    />
+    <Sidebar />
   </div>
 </template>
 
 <script>
-import Ingredients from '@/components/Ingredients.vue';
-import Recipes from '@/components/Recipes.vue';
+import Sidebar from '@/components/Sidebar.vue';
+import RecipeList from '@/components/RecipeList.vue';
+import { mapState } from 'vuex';
 
 export default {
-  components: { Ingredients, Recipes },
+  components: { Sidebar, RecipeList },
+  computed: {
+    ...mapState([
+      'sidebar',
+    ]),
+  },
 };
 </script>
 
 <style lang="scss">
   .home {
-    display: flex;
-    justify-content: flex-start;
+    .main-content {
+      transition: transform 0.8s;
+
+      &.parallax {
+        transform: translateX(-20px);
+      }
+    }
   }
 </style>

@@ -1,46 +1,75 @@
 <template>
-  <div class="recipe-list">
+  <div
+    class="recipe-list"
+    @click="hideSidebar"
+  >
+    <h1 class="title">рецепты</h1>
     <div class="display-modes">
       <label
+        class="mode-button"
+        :class="{ active: displayMode === mode.value }"
         v-for="mode in displayModes"
         :key="mode.value"
       >
         <span>{{ mode.title }}</span>
         <input
+          class="radio-button"
           type="radio"
           :value="mode.value"
           v-model="displayMode"
         >
       </label>
     </div>
-    <div>
+    <masonry
+      :cols="{default: 4, 1280: 3, 900: 2, 500: 1}"
+      :gutter="30"
+    >
       <div
         class="recipe"
         v-for="recipe in recipesToShow"
         :key="recipe.id"
       >
         <h2 class="recipe-title">{{ recipe.name }}</h2>
-        <div
-          v-for="ingredient in recipe.ingredients"
-          :key="ingredient.id"
-          :class="{ absent: ingredient.absence }"
-        >
-          {{ ingredientNameById(ingredient.id) }} {{ ingredient.amount + '; ' }}
+        <div class="ingredients-container">
+          <div
+            class="ingredient"
+            :class="{ absent: ingredient.absence }"
+            v-for="ingredient in recipe.ingredients"
+            :key="ingredient.id"
+          >
+            {{ ingredientNameById(ingredient.id) }} - {{ ingredient.amount }}
+          </div>
         </div>
-        <div>{{"метод: "}} {{ recipe.method }}</div>
-        <div>{{"посуда: "}} {{ recipe.drinkware }}</div>
-        <button
-          class="delete-button"
-          type="button"
-          @click="deleteRecipe(recipe.id)"
-        >X</button>
+        <div class="method"><b>метод: </b>{{ recipe.method }}</div>
+        <div><b>посуда: "</b>{{ recipe.drinkware }}</div>
+        <div class="buttons-container">
+          <button
+            class="edit-button"
+            type="button"
+            @click.stop="editRecipe(recipe.id)"
+          >edit</button>
+          <button
+            class="delete-button"
+            type="button"
+            @click="deleteRecipe(recipe.id)"
+          ></button>
+        </div>
       </div>
-    </div>
+    </masonry>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import Vue from 'vue';
+import VueMasonry from 'vue-masonry-css';
+import {
+  mapState,
+  mapGetters,
+  mapMutations,
+  mapActions,
+} from 'vuex';
+
+Vue.use(VueMasonry);
 
 const RECIPE_INGREDIENTS_CHECKPOINT = 5;
 const LOWER_CHECKPOINT_COEFFICIENT = 0.5;
@@ -123,11 +152,20 @@ export default {
     },
   },
   methods: {
+    ...mapMutations([
+      'showSidebar',
+      'hideSidebar',
+      'setRecipeIdForEditing',
+    ]),
     ...mapActions([
       'deleteRecipe',
     ]),
     checkIngredientAvailability(ingredientId) {
       return this.ingredients.find(item => item.id === ingredientId).availability;
+    },
+    editRecipe(recipeId) {
+      this.setRecipeIdForEditing(recipeId);
+      this.showSidebar('recipe-form');
     },
   },
 };
@@ -135,28 +173,141 @@ export default {
 
 <style lang="scss">
   .recipe-list {
-    .recipe {
-      position: relative;
-      padding: 15px;
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    overflow: auto;
+
+    .title {
       margin-bottom: 20px;
-      background-color: rgba(114, 221, 198, 0.3);
+      font-size: 22px;
+      letter-spacing: 0.5px;
+    }
+
+    .display-modes {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .radio-button {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .mode-button {
+      display: block;
+      margin-right: 10px;
+      padding: 5px 10px;
+      background-color: $color-main-2;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: $color-main-2-light;
+      }
+
+      &.active {
+        background-color: $color-secondary;
+      }
+    }
+
+    .recipe {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      margin-bottom: 30px;
+      padding: 20px 25px 25px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-color: $color-main-1;
+        transition: transform 0.3s;
+      }
+
+      &:hover {
+        .buttons-container {
+          opacity: 1;
+        }
+
+        &::before {
+          transform: scale(1.05);
+        }
+      }
     }
 
     .recipe-title {
+      margin-bottom: 15px;
       font-size: 18px;
-      margin: 0;
-      margin-bottom: 5px;
+    }
+
+    .ingredients-container {
+      align-self: center;
+      width: 105%;
+      margin-bottom: 15px;
+      padding: 5px;
+      background-color: $color-main-1-light;
+    }
+
+    .ingredient {
+      width: fit-content;
+      padding: 3px 4px;
+
+      &.absent {
+        background-color: $color-secondary-highlight;
+      }
+    }
+
+    .method {
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .buttons-container {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .edit-button {
+      padding: 5px;
     }
 
     .delete-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 0 3px;
-    }
+      position: relative;
+      width: 20px;
+      height: 20px;
 
-    .absent {
-      background-color: rgba(188, 224, 24, 0.281);
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 1px;
+        right: 8px;
+        width: 1px;
+        height: 15px;
+        background-color: $black;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
     }
   }
 </style>
