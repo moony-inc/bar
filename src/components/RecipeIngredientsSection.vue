@@ -24,7 +24,7 @@
       <label>
         <span class="label-text">что</span>
         <input
-          class="ingredient-input"
+          class="input-ingredient"
           type="text"
           :value="ingredient.name"
           @input="updateIngredientName"
@@ -34,7 +34,7 @@
       <label>
         <span class="label-text">сколько</span>
         <input
-          class="ingredient-input"
+          class="input-ingredient"
           type="text"
           v-model="ingredient.amount"
           ref="amountInput"
@@ -68,7 +68,7 @@
           <label>
             <div class="message">выберите категорию для нового ингредиента</div>
             <select
-              class="ingredient-input ingredient-category"
+              class="select-category"
               v-model="ingredient.category"
               required
             >
@@ -295,11 +295,16 @@ export default {
       padding: 5px;
     }
 
-    .ingredient-input {
+    .input-ingredient,
+    .select-category {
       width: 110px;
       margin-bottom: 20px;
       padding: 5px 5px 3px;
       border-bottom: 1px solid $black;
+    }
+
+    .select-category {
+      width: 180px;
     }
 
     .add-ingredient-button {
@@ -348,10 +353,6 @@ export default {
       &:focus {
         background-color: $color-secondary;
       }
-    }
-
-    .ingredient-category {
-      width: 180px;
     }
   }
 </style>
