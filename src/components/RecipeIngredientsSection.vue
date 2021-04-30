@@ -68,7 +68,7 @@
           <label>
             <div class="message">выберите категорию для нового ингредиента</div>
             <select
-              class="ingredient-input"
+              class="ingredient-input ingredient-category"
               v-model="ingredient.category"
               required
             >
@@ -350,7 +350,7 @@ export default {
       }
     }
 
-    select.ingredient-input {
+    .ingredient-category {
       width: 180px;
     }
   }

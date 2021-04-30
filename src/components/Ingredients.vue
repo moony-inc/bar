@@ -17,7 +17,7 @@
       <label>
         <span class="label-text">категория</span>
         <select
-          class="input-category"
+          class="select-category"
           v-model="selectedCategory"
           required
         >
@@ -98,7 +98,7 @@ export default {
     }
 
     .input-name,
-    .input-category {
+    .select-category {
       margin-bottom: 15px;
       padding: 10px 5px 3px;
       border-bottom: 1px solid $black;
@@ -108,7 +108,7 @@ export default {
       width: 230px;
     }
 
-    .input-category {
+    .select-category {
       width: 200px;
       margin-right: 10px;
     }

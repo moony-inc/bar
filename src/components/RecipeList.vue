@@ -195,7 +195,6 @@ export default {
       width: 0;
       height: 0;
       visibility: hidden;
-      opacity: 0;
     }
 
     .mode-button {
