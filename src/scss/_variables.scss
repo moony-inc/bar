@@ -1,0 +1,13 @@
+$black: #000;
+$gray-dark: lighten($black, 50%);
+$gray-light: lighten($black, 80%);
+$white: #fff;
+
+$color-background: rgba(#c3b8a6, 0.5);
+
+$color-main-1: #bab8c2;
+$color-main-1-light: lighten($color-main-1, $amount: 6);
+$color-main-2: #f0e6ba;
+$color-main-2-light: lighten($color-main-2, $amount: 6);
+$color-secondary: #ffc69e;
+$color-secondary-highlight: rgba($color-secondary, 0.5);
