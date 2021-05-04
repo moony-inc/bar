@@ -14,6 +14,7 @@ export default new Vuex.Store({
       mode: '',
     },
     recipeIdForEditing: null,
+    testDataHidden: true,
   },
   getters: {
     newIngredientId: state => (state.ingredients.length
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    hideTestData(state, value) {
+      state.testDataHidden = value;
+    },
     setCategories(state, categories) {
       state.categories = categories;
     },
@@ -109,6 +113,15 @@ export default new Vuex.Store({
       dispatch('saveRecipesLocalStorage');
     },
     // local storage methods
+    fetchTestData({ commit, dispatch }) {
+      return axios.get('/test_data.json').then(({ data }) => {
+        commit('hideTestData', true);
+        localStorage.setItem('ingredients', JSON.stringify(data.ingredients));
+        localStorage.setItem('recipes', JSON.stringify(data.recipes));
+        dispatch('setupIngredients');
+        dispatch('setupRecipes');
+      });
+    },
     setupIngredients({ commit }) {
       const localIngredients = localStorage.getItem('ingredients');
 
