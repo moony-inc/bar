@@ -16,19 +16,21 @@
       </label>
       <label>
         <span class="label-text">категория</span>
-        <select
-          class="select-category"
-          v-model="selectedCategory"
-          required
-        >
-          <option
-            v-for="category in categories"
-            :value="category.value"
-            :key="category.value"
+        <div class="select-container">
+          <select
+            class="select-category"
+            v-model="selectedCategory"
+            required
           >
-            {{ category.name }}
-          </option>
-        </select>
+            <option
+              v-for="category in categories"
+              :value="category.value"
+              :key="category.value"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
       </label>
       <button
         class="add-button"
@@ -111,6 +113,26 @@ export default {
     .select-category {
       width: 200px;
       margin-right: 10px;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .select-container {
+      display: inline-block;
+      position: relative;
+      width: auto;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        right: 18px;
+        border-bottom: 1px solid $black;
+        border-right: 1px solid $black;
+        width: 10px;
+        height: 10px;
+        transform: rotate(45deg);
+      }
     }
 
     .add-button {
