@@ -9,10 +9,8 @@ import { mapActions, mapMutations } from 'vuex';
 export default {
   components: { Home },
   created() {
-    if (localStorage.getItem('hideTestData')) {
-      this.hideTestData(true);
-    } else {
-      this.hideTestData(false);
+    if (!localStorage.getItem('hiddenTestData')) {
+      this.switchTestDataMessage(true);
     }
 
     this.fetchCategories().then(() => {
@@ -22,7 +20,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'hideTestData',
+      'switchTestDataMessage',
     ]),
     ...mapActions([
       'fetchCategories',
