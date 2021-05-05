@@ -67,19 +67,21 @@
         >
           <label>
             <div class="message">выберите категорию для нового ингредиента</div>
-            <select
-              class="select-category"
-              v-model="ingredient.category"
-              required
-            >
-              <option
-                v-for="category in categories"
-                :value="category.value"
-                :key="category.value"
+            <div class="select-container">
+              <select
+                class="select-category"
+                v-model="ingredient.category"
+                required
               >
-                {{ category.name }}
-              </option>
-            </select>
+                <option
+                  v-for="category in categories"
+                  :value="category.value"
+                  :key="category.value"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
           </label>
         </div>
       </transition>
@@ -232,7 +234,7 @@ export default {
   .recipe-ingredients-section {
     width: 320px;
     margin-bottom: 20px;
-    padding: 15px 10px 0 25px;
+    padding: 15px 10px 0 30px;
     background-color: $color-main-2-light;
 
     .list {
@@ -305,6 +307,26 @@ export default {
 
     .select-category {
       width: 180px;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .select-container {
+      display: inline-block;
+      position: relative;
+      width: auto;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        border-bottom: 1px solid $black;
+        border-right: 1px solid $black;
+        width: 10px;
+        height: 10px;
+        transform: rotate(45deg);
+      }
     }
 
     .add-ingredient-button {

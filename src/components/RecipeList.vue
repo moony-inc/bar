@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="method"><b>метод: </b>{{ recipe.method }}</div>
-        <div><b>посуда: "</b>{{ recipe.drinkware }}</div>
+        <div><b>посуда: </b>{{ recipe.drinkware }}</div>
         <div class="buttons-container">
           <button
             class="edit-button"
@@ -175,6 +175,7 @@ export default {
   .recipe-list {
     width: 100%;
     max-width: 1300px;
+    min-height: 100vh;
     margin-left: auto;
     margin-right: auto;
     padding: 30px;
@@ -192,9 +193,7 @@ export default {
     }
 
     .radio-button {
-      width: 0;
-      height: 0;
-      visibility: hidden;
+      display: none;
     }
 
     .mode-button {
