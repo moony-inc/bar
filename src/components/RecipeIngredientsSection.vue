@@ -21,7 +21,7 @@
       class="form"
       @submit.stop.prevent="addIngredientToRecipe"
     >
-      <label>
+      <label class="label-container-ingredient">
         <span class="label-text">что</span>
         <input
           class="input-ingredient"
@@ -31,7 +31,7 @@
           required
         >
       </label>
-      <label>
+      <label class="label-container-ingredient">
         <span class="label-text">сколько</span>
         <input
           class="input-ingredient"
@@ -232,7 +232,7 @@ export default {
 
 <style lang="scss">
   .recipe-ingredients-section {
-    width: 320px;
+    width: 85%;
     margin-bottom: 20px;
     padding: 15px 10px 0 30px;
     background-color: $color-main-2-light;
@@ -297,16 +297,20 @@ export default {
       padding: 5px;
     }
 
+    .label-container-ingredient {
+      width: 40%;
+    }
+
     .input-ingredient,
     .select-category {
-      width: 110px;
+      width: 100%;
       margin-bottom: 20px;
       padding: 5px 5px 3px;
       border-bottom: 1px solid $black;
     }
 
     .select-category {
-      width: 180px;
+      width: 100%;
       appearance: none;
       cursor: pointer;
     }
@@ -314,7 +318,7 @@ export default {
     .select-container {
       display: inline-block;
       position: relative;
-      width: auto;
+      width: 70%;
 
       &::before {
         content: '';
@@ -374,6 +378,30 @@ export default {
 
       &:focus {
         background-color: $color-secondary;
+      }
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-s) {
+    .recipe-ingredients-section {
+      .label-container-ingredient {
+        width: 75%;
+      }
+
+      .message {
+        font-size: 12px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-xs) {
+    .recipe-ingredients-section {
+      .label-container-ingredient {
+        width: 80%;
+      }
+
+      .message {
+        font-size: 11px;
       }
     }
   }

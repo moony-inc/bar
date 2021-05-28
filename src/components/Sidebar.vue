@@ -93,9 +93,33 @@ export default {
 
     .sidebar-content {
       height: 100vh;
-      padding: 40px 30px 100px;
+      padding: 40px 30px 60px;
       overflow: auto;
       background-color: $color-main-2;
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-s) {
+    .sidebar {
+      width: 300px;
+      transform: translateX(300px);
+
+      .sidebar-content {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-xs) {
+    .sidebar {
+      width: 250px;
+      transform: translateX(250px);
+
+      .sidebar-content {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
     }
   }
 </style>

@@ -4,7 +4,7 @@
     @submit.prevent="addRecipe"
   >
     <h1 class="title">{{ recipeIdForEditing === null ? 'новый рецепт' : 'редактирование' }}</h1>
-    <label>
+    <label class="label-container">
       <span class="label-text">название</span>
       <input
         class="input"
@@ -14,7 +14,7 @@
       >
     </label>
     <RecipeIngredientsSection v-model="recipeIngredients"/>
-    <label>
+    <label class="label-container">
       <span class="label-text">метод</span>
       <textarea
         class="input"
@@ -24,7 +24,7 @@
       >
       </textarea>
     </label>
-    <label>
+    <label class="label-container">
       <span class="label-text">посуда</span>
       <input
         class="input"
@@ -129,15 +129,17 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 
     .title {
       margin-bottom: 20px;
       text-align: center;
       font-size: 22px;
       letter-spacing: 0.5px;
+    }
+
+    .label-container {
+      width: 65%;
     }
 
     .label-text {
@@ -147,14 +149,13 @@ export default {
     }
 
     .input {
-      width: 250px;
+      width: 100%;
       margin-bottom: 20px;
       padding: 5px 5px 3px;
       border-bottom: 1px solid $black;
     }
 
     .add-recipe-button {
-      align-self: center;
       padding: 8px;
       border: 1px solid $black;
       background-color: $color-main-2-light;

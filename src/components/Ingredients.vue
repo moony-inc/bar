@@ -6,7 +6,7 @@
       @submit.prevent="addIngredient"
     >
       <h2 class="form-title">новый игредиент</h2>
-      <label>
+      <label class="label-container-ingredient">
         <span class="label-text">ингредиент</span>
         <input
           class="input-name"
@@ -14,28 +14,30 @@
           v-model="ingredientName"
         >
       </label>
-      <label>
-        <span class="label-text">категория</span>
-        <div class="select-container">
-          <select
-            class="select-category"
-            v-model="selectedCategory"
-            required
-          >
-            <option
-              v-for="category in categories"
-              :value="category.value"
-              :key="category.value"
+      <div class="form-block">
+        <label class="label-container-category">
+          <span class="label-text">категория</span>
+          <div class="select-container">
+            <select
+              class="select-category"
+              v-model="selectedCategory"
+              required
             >
-              {{ category.name }}
-            </option>
-          </select>
-        </div>
-      </label>
-      <button
-        class="add-button"
-        type="submit"
-      ></button>
+              <option
+                v-for="category in categories"
+                :value="category.value"
+                :key="category.value"
+              >
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+        </label>
+        <button
+          class="add-button"
+          type="submit"
+        ></button>
+      </div>
     </form>
   </div>
 </template>
@@ -78,20 +80,35 @@ export default {
 
 <style lang="scss">
   .ingredients {
-    width: 250px;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
 
     .add-form {
-      width: 230px;
-      margin-left: auto;
-      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     .form-title {
       margin-bottom: 15px;
       text-align: center;
       font-size: 18px;
+    }
+
+    .form-block,
+    .label-container-ingredient {
+      width: 90%;
+    }
+
+    .label-container-category {
+      width: 85%;
+    }
+
+    .form-block {
+      display: flex;
+      justify-content: space-between;
     }
 
     .label-text {
@@ -101,26 +118,20 @@ export default {
 
     .input-name,
     .select-category {
+      width: 100%;
       margin-bottom: 15px;
       padding: 10px 5px 3px;
       border-bottom: 1px solid $black;
     }
 
-    .input-name {
-      width: 230px;
-    }
-
     .select-category {
-      width: 200px;
-      margin-right: 10px;
       appearance: none;
       cursor: pointer;
     }
 
     .select-container {
-      display: inline-block;
       position: relative;
-      width: auto;
+      width: 100%;
 
       &::before {
         content: '';
@@ -136,8 +147,8 @@ export default {
     }
 
     .add-button {
-      display: inline-block;
       position: relative;
+      align-self: center;
       width: 20px;
       height: 20px;
 
@@ -155,6 +166,12 @@ export default {
       &::after {
         transform: rotate(90deg);
       }
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-xs) {
+    .ingredients {
+      width: 80%;
     }
   }
 </style>
