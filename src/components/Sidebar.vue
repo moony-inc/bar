@@ -61,7 +61,7 @@ export default {
     right: 0;
     width: 420px;
     overflow: visible;
-    transform: translateX(420px);
+    transform: translateX(100%);
     transition: transform 0.5s;
 
     &.show {
@@ -102,7 +102,6 @@ export default {
   @media screen and (max-width: $display-breakpoint-s) {
     .sidebar {
       width: 300px;
-      transform: translateX(300px);
 
       .sidebar-content {
         padding-left: 15px;
@@ -114,7 +113,6 @@ export default {
   @media screen and (max-width: $display-breakpoint-xs) {
     .sidebar {
       width: 250px;
-      transform: translateX(250px);
 
       .sidebar-content {
         padding-left: 15px;
