@@ -61,7 +61,7 @@ export default {
     right: 0;
     width: 420px;
     overflow: visible;
-    transform: translateX(420px);
+    transform: translateX(100%);
     transition: transform 0.5s;
 
     &.show {
@@ -93,9 +93,31 @@ export default {
 
     .sidebar-content {
       height: 100vh;
-      padding: 40px 30px 100px;
+      padding: 40px 30px 60px;
       overflow: auto;
       background-color: $color-main-2;
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-s) {
+    .sidebar {
+      width: 300px;
+
+      .sidebar-content {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-xs) {
+    .sidebar {
+      width: 250px;
+
+      .sidebar-content {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
     }
   }
 </style>
