@@ -15,8 +15,7 @@
         <input
           class="radio-button"
           type="radio"
-          :value="mode.value"
-          @click="selectDisplayMode"
+          @click="selectDisplayMode(mode.value)"
         >
       </label>
     </div>
@@ -153,7 +152,7 @@ export default {
     },
   },
   created() {
-    if (this.$route.query) {
+    if (this.$route.query['display-mode']) {
       this.displayMode = this.$route.query['display-mode'];
     }
   },
@@ -173,16 +172,15 @@ export default {
       this.setRecipeIdForEditing(recipeId);
       this.showSidebar('recipe-form');
     },
-    selectDisplayMode(event) {
-      this.displayMode = event.target.value;
-      if (this.displayMode !== 'recipes') {
-        this.$router.push({
+    selectDisplayMode(mode) {
+      this.displayMode = mode;
+      this.$router.push(this.displayMode !== 'recipes'
+        ? {
           path: '/',
           query: { 'display-mode': this.displayMode },
-        }).catch(() => {});
-      } else {
-        this.$router.push({ path: '/' }).catch(() => {});
-      }
+        }
+        : { path: '/' })
+        .catch(() => {});
     },
   },
 };
