@@ -16,7 +16,7 @@
           class="radio-button"
           type="radio"
           :value="mode.value"
-          v-model="displayMode"
+          @click="selectDisplayMode"
         >
       </label>
     </div>
@@ -105,7 +105,7 @@ export default {
       let recipesToShow = [];
 
       switch (this.displayMode) {
-        case 'can-do':
+        case 'can-do': {
           recipesToShow = this.recipes
             .filter(recipe => !this.ingredients
               .some(ingredient => (
@@ -113,6 +113,7 @@ export default {
                 && !ingredient.availability
               )));
           break;
+        }
         case 'almost-can-do': {
           const filteredRecipes = this.recipes.filter(recipe => {
             let limit = 0;
@@ -151,6 +152,11 @@ export default {
       return recipesToShow;
     },
   },
+  created() {
+    if (this.$route.query) {
+      this.displayMode = this.$route.query['display-mode'];
+    }
+  },
   methods: {
     ...mapMutations([
       'showSidebar',
@@ -166,6 +172,17 @@ export default {
     editRecipe(recipeId) {
       this.setRecipeIdForEditing(recipeId);
       this.showSidebar('recipe-form');
+    },
+    selectDisplayMode(event) {
+      this.displayMode = event.target.value;
+      if (this.displayMode !== 'recipes') {
+        this.$router.push({
+          path: '/',
+          query: { 'display-mode': this.displayMode },
+        }).catch(() => {});
+      } else {
+        this.$router.push({ path: '/' }).catch(() => {});
+      }
     },
   },
 };
