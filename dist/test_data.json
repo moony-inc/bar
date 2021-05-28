@@ -1,0 +1,399 @@
+{
+  "recipes": [
+    {
+      "name": "американо",
+      "ingredients": [
+        {
+          "id": 0,
+          "amount": "30 мл"
+        },
+        {
+          "id": 1,
+          "amount": "30 мл"
+        },
+        {
+          "id": 2,
+          "amount": "доверху"
+        }
+      ],
+      "method": "смешать ингредиенты непосредственно в стакане со льдом",
+      "drinkware": "рокс",
+      "id": 0
+    },
+    {
+      "name": "бульвардье",
+      "ingredients": [
+        {
+          "id": 3,
+          "amount": "45 мл"
+        },
+        {
+          "id": 0,
+          "amount": "30 мл"
+        },
+        {
+          "id": 1,
+          "amount": "30 мл"
+        }
+      ],
+      "method": "смешать ингредиенты в смесительном стакане",
+      "drinkware": "коктейльная рюмка",
+      "id": 1
+    },
+    {
+      "name": "кловер клаб",
+      "ingredients": [
+        {
+          "id": 4,
+          "amount": "45 мл"
+        },
+        {
+          "id": 5,
+          "amount": "15 мл"
+        },
+        {
+          "id": 6,
+          "amount": "15 мл"
+        },
+        {
+          "id": 7,
+          "amount": "15 мл"
+        }
+      ],
+      "method": "смешать ингредиенты в шейкере",
+      "drinkware": "коктейльная рюмка",
+      "id": 2
+    },
+    {
+      "name": "дайкири",
+      "ingredients": [
+        {
+          "id": 8,
+          "amount": "60 мл"
+        },
+        {
+          "id": 9,
+          "amount": "20 мл"
+        },
+        {
+          "id": 10,
+          "amount": "2 барных ложки"
+        }
+      ],
+      "method": "смешать ингредиенты в шейкере",
+      "drinkware": "коктейльная рюмка",
+      "id": 3
+    },
+    {
+      "name": "драй мартини",
+      "ingredients": [
+        {
+          "id": 4,
+          "amount": "60 мл"
+        },
+        {
+          "id": 11,
+          "amount": "10 мл"
+        }
+      ],
+      "method": "смешать ингредиенты в смесительном стакане",
+      "drinkware": "коктейльная рюмка",
+      "id": 4
+    },
+    {
+      "name": "джон коллинз",
+      "ingredients": [
+        {
+          "id": 4,
+          "amount": "45 мл"
+        },
+        {
+          "id": 6,
+          "amount": "30 мл"
+        },
+        {
+          "id": 12,
+          "amount": "15 мл"
+        }
+      ],
+      "method": "смешать ингредиенты непосредственно в стакане со льдом",
+      "drinkware": "хайбол",
+      "id": 5
+    },
+    {
+      "name": "негрони",
+      "ingredients": [
+        {
+          "id": 4,
+          "amount": "30 мл"
+        },
+        {
+          "id": 0,
+          "amount": "30 мл"
+        },
+        {
+          "id": 1,
+          "amount": "30 мл"
+        }
+      ],
+      "method": "смешать ингредиенты непосредственно в стакане со льдом",
+      "drinkware": "рокс",
+      "id": 6
+    },
+    {
+      "name": "виски сауэр",
+      "ingredients": [
+        {
+          "id": 3,
+          "amount": "45 мл"
+        },
+        {
+          "id": 6,
+          "amount": "25 мл"
+        },
+        {
+          "id": 12,
+          "amount": "20 мл"
+        },
+        {
+          "id": 7,
+          "amount": "20 мл"
+        }
+      ],
+      "method": "смешать ингредиенты в шейкере",
+      "drinkware": "коктейльная рюмка или рокс со льдом",
+      "id": 7
+    },
+    {
+      "name": "кровавая мэри",
+      "ingredients": [
+        {
+          "id": 13,
+          "amount": "45 мл"
+        },
+        {
+          "id": 14,
+          "amount": "90 мл"
+        },
+        {
+          "id": 6,
+          "amount": "15 мл"
+        },
+        {
+          "id": 15,
+          "amount": "2 дэш"
+        },
+        {
+          "id": 16,
+          "amount": "по вкусу"
+        },
+        {
+          "id": 17,
+          "amount": "по вкусу"
+        },
+        {
+          "id": 18,
+          "amount": "по вкусу"
+        }
+      ],
+      "method": "смешать ингредиенты в смесительном стакане",
+      "drinkware": "рокс или хайбол со льдом",
+      "id": 8
+    },
+    {
+      "name": "куба либре",
+      "ingredients": [
+        {
+          "id": 8,
+          "amount": "50 мл"
+        },
+        {
+          "id": 19,
+          "amount": "120 мл"
+        },
+        {
+          "id": 9,
+          "amount": "10 мл"
+        }
+      ],
+      "method": "смешать ингредиенты непосредственно в стакане со льдом",
+      "drinkware": "хайбол",
+      "id": 9
+    },
+    {
+      "name": "лонг айленд",
+      "ingredients": [
+        {
+          "id": 13,
+          "amount": "15 мл"
+        },
+        {
+          "id": 20,
+          "amount": "15 мл"
+        },
+        {
+          "id": 8,
+          "amount": "15 мл"
+        },
+        {
+          "id": 4,
+          "amount": "15 мл"
+        },
+        {
+          "id": 21,
+          "amount": "15 мл"
+        },
+        {
+          "id": 6,
+          "amount": "25 мл"
+        },
+        {
+          "id": 12,
+          "amount": "30 мл"
+        },
+        {
+          "id": 19,
+          "amount": "доверху"
+        }
+      ],
+      "method": "смешать ингредиенты непосредственно в стакане со льдом",
+      "drinkware": "хайбол",
+      "id": 10
+    }
+  ],
+  "ingredients": [
+    {
+      "name": "кампари",
+      "category": "wines",
+      "availability": false,
+      "id": 0
+    },
+    {
+      "name": "красный вермут",
+      "category": "wines",
+      "availability": false,
+      "id": 1
+    },
+    {
+      "name": "содовая",
+      "category": "soft",
+      "availability": true,
+      "id": 2
+    },
+    {
+      "name": "бурбон",
+      "category": "spirits",
+      "availability": false,
+      "id": 3
+    },
+    {
+      "name": "джин",
+      "category": "spirits",
+      "availability": false,
+      "id": 4
+    },
+    {
+      "name": "малиновый сироп",
+      "category": "syrops",
+      "availability": false,
+      "id": 5
+    },
+    {
+      "name": "лимонный фреш",
+      "category": "soft",
+      "availability": false,
+      "id": 6
+    },
+    {
+      "name": "белок",
+      "category": "other",
+      "availability": true,
+      "id": 7
+    },
+    {
+      "name": "белый ром",
+      "category": "spirits",
+      "availability": true,
+      "id": 8
+    },
+    {
+      "name": "лаймовый фреш",
+      "category": "soft",
+      "availability": true,
+      "id": 9
+    },
+    {
+      "name": "сахарная пудра",
+      "category": "other",
+      "availability": true,
+      "id": 10
+    },
+    {
+      "name": "сухой вермут",
+      "category": "wines",
+      "availability": true,
+      "id": 11
+    },
+    {
+      "name": "сахарный сироп",
+      "category": "syrops",
+      "availability": true,
+      "id": 12
+    },
+    {
+      "name": "водка",
+      "category": "spirits",
+      "availability": true,
+      "id": 13
+    },
+    {
+      "name": "томатный сок",
+      "category": "soft",
+      "availability": false,
+      "id": 14
+    },
+    {
+      "name": "вустерский соус",
+      "category": "other",
+      "availability": false,
+      "id": 15
+    },
+    {
+      "name": "табаско",
+      "category": "other",
+      "availability": false,
+      "id": 16
+    },
+    {
+      "name": "соль",
+      "category": "other",
+      "availability": true,
+      "id": 17
+    },
+    {
+      "name": "перец",
+      "category": "other",
+      "availability": true,
+      "id": 18
+    },
+    {
+      "name": "кола",
+      "category": "soft",
+      "availability": true,
+      "id": 19
+    },
+    {
+      "name": "текила",
+      "category": "spirits",
+      "availability": false,
+      "id": 20
+    },
+    {
+      "name": "трипл сек",
+      "category": "liqueurs",
+      "availability": false,
+      "id": 21
+    }
+  ]
+}
+
