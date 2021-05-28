@@ -89,7 +89,7 @@ export default {
 
     .ingredient {
       position: relative;
-      width: 250px;
+      width: 100%;
       padding: 10px;
 
       &:hover {
@@ -144,6 +144,14 @@ export default {
         &::after {
           background-color: $gray-dark;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: $display-breakpoint-xs) {
+    .ingredient-list {
+      .category-title {
+        font-size: 15px;
       }
     }
   }
